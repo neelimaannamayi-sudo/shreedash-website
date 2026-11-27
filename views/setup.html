@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Admin setup · Shreedash</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -12,7 +16,7 @@
 body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);font:16px/1.55 "Plus Jakarta Sans",system-ui,sans-serif;padding:16px}
 main{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:32px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;margin-bottom:20px}
-.logo i{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,#5b21d6,#7c4dff);display:grid;place-items:center;font-style:normal;color:#fff}
+.logo img{width:32px;height:32px;flex:none;display:block}
 h1{font-size:26px;margin:0 0 20px;letter-spacing:-.02em}
 label{display:block;font-weight:600;font-size:14px;margin:14px 0 6px}
 input{width:100%;font:16px "Plus Jakarta Sans",sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px}
@@ -25,7 +29,7 @@ a{color:var(--mute);font-size:14px;display:inline-block;margin-top:18px}
 </head>
 <body>
 <main>
-  <div class="logo"><i>S</i>Shreedash</div>
+  <div class="logo"><img src="/logo.svg" alt="" width="38" height="38">Shreedash</div>
   <h1>Create your admin account</h1>
   <p class="hint">This appears once, before any admin exists. Enter the setup code from your server log (look for "one-time setup code"), then choose your login.</p>
   <p class="err" id="err" role="alert"></p>

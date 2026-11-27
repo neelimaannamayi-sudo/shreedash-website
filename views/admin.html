@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>Enquiries · Shreedash admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -14,7 +18,7 @@ header{background:linear-gradient(120deg,#1d0b4a,#3a149c);color:#fff}
 header .in,main{max-width:1240px;margin:0 auto;padding:14px max(4vw,16px)}
 header .in{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#fff;text-decoration:none}
-.logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5b21d6,#7c4dff);display:grid;place-items:center;font-style:normal;color:#fff}
+.logo img{width:32px;height:32px;flex:none;display:block}
 .logo small{font-weight:600;opacity:.7;font-size:14px}
 .hbtn{display:flex;gap:8px}
 button,.btn{font:700 14px "Plus Jakarta Sans",sans-serif;min-height:40px;padding:0 14px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
@@ -54,7 +58,7 @@ td select{font:14px "Plus Jakarta Sans",sans-serif;min-height:38px;border:1.5px 
 </head>
 <body>
 <header><div class="in">
-  <a class="logo" href="/admin"><i>S</i>Shreedash <small>Admin</small></a>
+  <a class="logo" href="/admin"><img src="/logo.svg" alt="" width="38" height="38">Shreedash <small>Admin</small></a>
   <div class="hbtn">
     <a class="btn" href="/api/admin/enquiries.csv">Export CSV</a>
     <a class="btn" href="/" target="_blank" rel="noopener">View site</a>
