@@ -38,6 +38,15 @@ Marketing website for Shreedash (IT staffing, software development, data enginee
    ```
    Website: http://localhost:3000 · Admin: http://localhost:3000/admin
 
+## Deploying to a host (GoDaddy and others)
+
+The site starts even when the host passes no settings:
+
+- **Database:** reads `DB_HOST`, `DB_PORT`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`, or the common alternatives (`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`, `MYSQLHOST`..., or a single `DATABASE_URL` / `MYSQL_URL` like `mysql://user:pass@host:3306/db`). Tables are created automatically. If the database can't be reached, the website still runs, the contact form asks visitors to email instead, and the server retries every 30 seconds.
+- **Session secret:** if `SESSION_SECRET` isn't set, one is generated and stored in the database.
+- **Admin login:** if `ADMIN_PASSWORD_HASH` isn't set, the first visit to `/admin` opens a one-time setup page. Enter the setup code printed in the server log (look for "one-time setup code"), then choose a username and password. The account is stored (hashed) in the database and the setup page disappears.
+- `GET /healthz` returns `{"ok":true,"database":true|false}` for health checks.
+
 ## Admin page
 
 - Sign in with `ADMIN_USERNAME` and the password you hashed.
