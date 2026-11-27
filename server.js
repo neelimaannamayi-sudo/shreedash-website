@@ -10,6 +10,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const rateLimit = require('express-rate-limit');
 const bcrypt = require('bcryptjs');
 const db = require('./db');
+const validate = require('./public/validate');
 
 const {
   PORT = 3000,
@@ -137,8 +138,6 @@ async function start() {
     message: { error: 'Too many messages from this address. Please try again in a few minutes.' } });
 
   const clean = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
-  const PHONE_RE = /^\+?[0-9][0-9 ()\-.]{5,28}$/;
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   app.post('/api/contact', contactLimiter, async (req, res) => {
     const body = req.body || {};
@@ -146,18 +145,21 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     if (body.website) return res.status(201).json({ ok: true });
 
     const name = clean(body.name, 120);
-    const email = clean(body.email, 190);
-    const phone = clean(body.phone, 30);
+    const em = validate.email(body.email);
+    const ph = validate.phone(body.phone);
     const company = clean(body.company, 190) || null;
     const topic = TOPICS.includes(body.topic) ? body.topic : 'Software development';
     const message = clean(body.message, 5000);
 
-    if (!name || !EMAIL_RE.test(email) || message.length < 2) {
-      return res.status(400).json({ error: 'Please add your name, a valid email and a short message.' });
+    const fields = {};
+    if (!name) fields.name = 'Please enter your name.';
+    if (!em.ok) fields.email = em.error;
+    if (!ph.ok) fields.phone = ph.error;
+    if (message.length < 2) fields.msg = 'Please tell us briefly how we can help.';
+    if (Object.keys(fields).length) {
+      return res.status(400).json({ error: Object.values(fields)[0], fields });
     }
-    if (!PHONE_RE.test(phone) || phone.replace(/\D/g, '').length < 7) {
-      return res.status(400).json({ error: 'Please add a valid mobile number.' });
-    }
+    const email = em.value, phone = ph.value;
     if (!db.state.ready) return res.status(503).json({ error: 'We could not save your message just now. Please email us instead.' });
     try {
       await db.pool.execute(

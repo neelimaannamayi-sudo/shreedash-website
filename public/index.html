@@ -190,6 +190,9 @@ input,select,textarea{width:100%;font:16px "Plus Jakarta Sans",sans-serif;color:
 input:focus,select:focus,textarea:focus{border-color:var(--v)}
 textarea{min-height:130px;resize:vertical}
 .err{color:#c4281c;font-size:14px}
+.ferr{display:block;color:#c4281c;font-size:13px;margin-top:6px}
+.ferr:empty{display:none}
+input[aria-invalid=true],textarea[aria-invalid=true]{border-color:#c4281c;background:#fff6f5}
 .ok{display:none;grid-column:1/-1;background:var(--vl);border-left:4px solid var(--y);padding:14px 16px;border-radius:10px}
 .small{font-size:13px;color:var(--mute)}
 
@@ -546,15 +549,15 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
       <p class="small" style="margin-top:16px">Contact details shown are placeholders.</p>
     </div>
     <form id="f" novalidate>
-      <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
-      <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
-      <div><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" maxlength="30" required></div>
+      <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" maxlength="120" required aria-describedby="e-name"><small class="ferr" id="e-name"></small></div>
+      <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="190" placeholder="name@company.com" required aria-describedby="e-email"><small class="ferr" id="e-email"></small></div>
+      <div><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" maxlength="30" required aria-describedby="e-phone"><small class="ferr" id="e-phone"></small></div>
       <div><label for="company">Company or college</label><input id="company" name="company" autocomplete="organization"></div>
       <div class="full"><label for="topic">I am interested in</label>
         <select id="topic" name="topic">
           <option>Software development</option><option>IT staffing</option><option>Data engineering</option><option>AI applications</option><option>e-Commerce and payments</option><option>Internship: Data Engineering</option><option>Internship: Web Development</option><option>Internship: AI Applications</option>
         </select></div>
-      <div class="full"><label for="msg">How can we help?</label><textarea id="msg" name="msg" required></textarea></div>
+      <div class="full"><label for="msg">How can we help?</label><textarea id="msg" name="msg" maxlength="5000" required aria-describedby="e-msg"></textarea><small class="ferr" id="e-msg"></small></div>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
       <p class="err full" id="err" aria-live="polite"></p>
       <div class="full"><button class="btn arrow" type="submit">Send message</button></div>
@@ -575,6 +578,7 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
   </div>
 </footer>
 
+<script src="/validate.js"></script>
 <script>
 {
 const ic = {
@@ -645,24 +649,40 @@ links.addEventListener('click', e => { if (e.target.tagName === 'A') { links.cla
 
 const f = document.getElementById('f'), err = document.getElementById('err'), ok = document.getElementById('ok');
 const btn = f.querySelector('button[type=submit]');
+const V = window.ShreedashValidate;
+const showField = (id, msg) => {
+  const el = document.getElementById(id), box = document.getElementById('e-' + id);
+  if (!el || !box) return;
+  box.textContent = msg || '';
+  if (msg) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid');
+};
+const check = {
+  name: () => f.name.value.trim() ? '' : 'Please enter your name.',
+  email: () => { const r = V.email(f.email.value); return r.ok ? '' : r.error; },
+  phone: () => { const r = V.phone(f.phone.value); if (r.ok) f.phone.value = r.value; return r.ok ? '' : r.error; },
+  msg: () => f.msg.value.trim().length >= 2 ? '' : 'Please tell us briefly how we can help.'
+};
+for (const id of Object.keys(check)) {
+  const el = document.getElementById(id);
+  el.addEventListener('blur', () => { if (el.value.trim()) showField(id, check[id]()); });
+  el.addEventListener('input', () => { if (el.getAttribute('aria-invalid')) showField(id, check[id]()); });
+}
 f.addEventListener('submit', async e => {
   e.preventDefault();
-  const data = {name: f.name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), company: f.company.value.trim(), topic: f.topic.value, message: f.msg.value.trim(), website: f.website.value};
-  if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) || !data.message) {
-    err.textContent = 'Please add your name, a valid email and a short message.';
-    return;
-  }
-  if (!/^\+?[0-9][0-9 ()\-.]{5,28}$/.test(data.phone) || data.phone.replace(/\D/g, '').length < 7) {
-    err.textContent = 'Please add a valid mobile number.';
-    return;
-  }
   err.textContent = '';
   ok.style.display = 'none';
+  let first = null;
+  for (const id of Object.keys(check)) { const m = check[id](); showField(id, m); if (m && !first) first = id; }
+  if (first) { document.getElementById(first).focus(); return; }
+  const data = {name: f.name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), company: f.company.value.trim(), topic: f.topic.value, message: f.msg.value.trim(), website: f.website.value};
   btn.disabled = true; btn.textContent = 'Sending…';
   try {
     const r = await fetch('/api/contact', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
     const j = await r.json().catch(() => ({}));
-    if (!r.ok) throw new Error(j.error || 'Something went wrong. Please try again.');
+    if (!r.ok) {
+      if (j.fields) for (const [id, m] of Object.entries(j.fields)) showField(id, m);
+      throw new Error(j.error || 'Something went wrong. Please try again.');
+    }
     f.reset();
     ok.style.display = 'block';
     ok.textContent = 'Thanks, ' + data.name + '. We received your message about "' + data.topic + '" and will reply within one business day.';
