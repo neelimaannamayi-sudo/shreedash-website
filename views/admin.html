@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Enquiries · Shreedash admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light dark;--bg:light-dark(#f3f5f7,#101418);--card:light-dark(#fff,#171d24);--ink:light-dark(#101418,#eef1f4);--mute:light-dark(#4a5562,#a7b1bc);--line:light-dark(#dde2e7,#2a323b);--y:#ffd84a}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Manrope,system-ui,sans-serif}
+header{background:#101418;color:#fff}
+header .in,main{max-width:1240px;margin:0 auto;padding:14px max(4vw,16px)}
+header .in{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#fff;text-decoration:none}
+.logo i{width:28px;height:28px;border-radius:8px;background:var(--y);display:grid;place-items:center;font-style:normal;color:#101418}
+.logo small{font-weight:600;opacity:.7;font-size:14px}
+.hbtn{display:flex;gap:8px}
+button,.btn{font:700 14px Manrope,sans-serif;min-height:40px;padding:0 14px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+header button,header .btn{background:transparent;color:#fff;border-color:#3c4a5a}
+button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+h1{font-size:30px;letter-spacing:-.02em;margin:18px 0 16px}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left;display:block;min-height:0;font-weight:400}
+.tile b{display:block;font-size:28px;font-weight:800;line-height:1.1}
+.tile span{color:var(--mute);font-size:14px}
+.tile.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
+.bar input,.bar select{font:16px Manrope,sans-serif;min-height:44px;padding:8px 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink)}
+.bar input{flex:1 1 240px}
+.wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--mute);font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.when{white-space:nowrap;color:var(--mute);font-size:14px}
+.who b{display:block}
+.who a{color:var(--mute);font-size:14px;overflow-wrap:anywhere}
+.msg{color:var(--mute);max-width:46ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap}
+tr.open .msg{-webkit-line-clamp:unset;color:var(--ink)}
+.pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--bg);white-space:nowrap}
+td select{font:14px Manrope,sans-serif;min-height:38px;border:1.5px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);padding:4px 8px}
+.st-new{border-color:#e0b000 !important}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.acts button{min-height:36px;padding:0 10px;font-size:13px}
+.danger{color:#b3261e}
+.empty{padding:40px;text-align:center;color:var(--mute)}
+.pager{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:14px 0 40px;color:var(--mute);flex-wrap:wrap}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#101418;color:#fff;padding:10px 16px;border-radius:10px;display:none;z-index:5}
+@media(max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}thead{display:none}tr{display:grid;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}td{border:0;padding:0}.msg{max-width:none}}
+</style>
+</head>
+<body>
+<header><div class="in">
+  <a class="logo" href="/admin"><i>S</i>Shreedash <small>Admin</small></a>
+  <div class="hbtn">
+    <a class="btn" href="/api/admin/enquiries.csv">Export CSV</a>
+    <a class="btn" href="/" target="_blank" rel="noopener">View site</a>
+    <form method="post" action="/admin/logout"><button type="submit">Sign out</button></form>
+  </div>
+</div></header>
+<main>
+  <h1>Enquiries</h1>
+  <div class="tiles" id="tiles">
+    <button class="tile" data-s=""><b id="c-all">0</b><span>All</span></button>
+    <button class="tile" data-s="new"><b id="c-new">0</b><span>New</span></button>
+    <button class="tile" data-s="in_progress"><b id="c-in_progress">0</b><span>In progress</span></button>
+    <button class="tile" data-s="closed"><b id="c-closed">0</b><span>Closed</span></button>
+  </div>
+  <div class="bar">
+    <label for="q" hidden>Search</label>
+    <input id="q" type="search" placeholder="Search name, email, company or message">
+    <label for="topic" hidden>Topic</label>
+    <select id="topic"><option value="">All topics</option></select>
+  </div>
+  <div class="wrap">
+    <table>
+      <thead><tr><th>Received</th><th>From</th><th>Topic</th><th>Message</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody id="rows"><tr><td colspan="6" class="empty">Loading…</td></tr></tbody>
+    </table>
+  </div>
+  <div class="pager"><span id="info"></span><span><button id="prev">Previous</button> <button id="next">Next</button></span></div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+<script>
+{
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LABEL = {new:'New', in_progress:'In progress', closed:'Closed'};
+const st = {q:'', status:'', topic:'', page:1, total:0, pageSize:25};
+let topicsLoaded = false, timer;
+
+const toast = t => { const el = $('toast'); el.textContent = t; el.style.display = 'block'; clearTimeout(el._t); el._t = setTimeout(() => el.style.display = 'none', 2500); };
+const api = async (url, opt = {}) => {
+  const r = await fetch(url, {...opt, headers: {'Content-Type':'application/json', ...(opt.headers||{})}, credentials:'same-origin'});
+  if (r.status === 401) { location.href = '/admin/login'; throw new Error('Signed out'); }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || 'Request failed');
+  return j;
+};
+const fmt = d => new Date(d).toLocaleString(undefined, {day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit'});
+
+async function load() {
+  const p = new URLSearchParams({q: st.q, status: st.status, topic: st.topic, page: st.page});
+  try {
+    const d = await api('/api/admin/enquiries?' + p);
+    st.total = d.total; st.pageSize = d.pageSize;
+    const c = d.counts || {};
+    $('c-all').textContent = (c.new||0) + (c.in_progress||0) + (c.closed||0);
+    for (const k of ['new','in_progress','closed']) $('c-' + k).textContent = c[k] || 0;
+    if (!topicsLoaded) { $('topic').insertAdjacentHTML('beforeend', d.topics.map(t => `<option>${esc(t)}</option>`).join('')); topicsLoaded = true; }
+    document.querySelectorAll('.tile').forEach(t => t.classList.toggle('on', t.dataset.s === st.status));
+    $('rows').innerHTML = d.rows.length ? d.rows.map(r => `
+      <tr data-id="${Number(r.id)}">
+        <td class="when">${esc(fmt(r.created_at))}</td>
+        <td class="who"><b>${esc(r.name)}</b><a href="mailto:${esc(r.email)}">${esc(r.email)}</a>${r.company ? `<div>${esc(r.company)}</div>` : ''}</td>
+        <td><span class="pill">${esc(r.topic)}</span></td>
+        <td><div class="msg">${esc(r.message)}</div></td>
+        <td><select class="status ${r.status === 'new' ? 'st-new' : ''}" aria-label="Status">${Object.keys(LABEL).map(k => `<option value="${k}"${k === r.status ? ' selected' : ''}>${LABEL[k]}</option>`).join('')}</select></td>
+        <td><div class="acts"><button class="more">Read</button><a class="btn" style="min-height:36px;font-size:13px;padding:0 10px" href="mailto:${esc(r.email)}?subject=${encodeURIComponent('Re: your enquiry to Shreedash')}">Reply</a><button class="del danger">Delete</button></div></td>
+      </tr>`).join('') : `<tr><td colspan="6" class="empty">${st.q || st.status || st.topic ? 'No enquiries match these filters.' : 'No enquiries yet. Messages sent from the contact form will appear here.'}</td></tr>`;
+    const from = d.total ? (st.page - 1) * st.pageSize + 1 : 0, to = Math.min(st.page * st.pageSize, d.total);
+    $('info').textContent = `Showing ${from}–${to} of ${d.total}`;
+    $('prev').disabled = st.page <= 1; $('next').disabled = to >= d.total;
+  } catch (e) { if (e.message !== 'Signed out') $('rows').innerHTML = `<tr><td colspan="6" class="empty">${esc(e.message)}</td></tr>`; }
+}
+
+$('tiles').addEventListener('click', e => { const t = e.target.closest('.tile'); if (!t) return; st.status = t.dataset.s; st.page = 1; load(); });
+$('q').addEventListener('input', e => { clearTimeout(timer); timer = setTimeout(() => { st.q = e.target.value.trim(); st.page = 1; load(); }, 300); });
+$('topic').addEventListener('change', e => { st.topic = e.target.value; st.page = 1; load(); });
+$('prev').addEventListener('click', () => { st.page--; load(); });
+$('next').addEventListener('click', () => { st.page++; load(); });
+
+$('rows').addEventListener('change', async e => {
+  if (!e.target.matches('select.status')) return;
+  const id = e.target.closest('tr').dataset.id;
+  try { await api('/api/admin/enquiries/' + id, {method:'PATCH', body: JSON.stringify({status: e.target.value})}); toast('Status updated'); load(); }
+  catch (x) { toast(x.message); load(); }
+});
+$('rows').addEventListener('click', async e => {
+  const tr = e.target.closest('tr'); if (!tr) return;
+  if (e.target.matches('.more')) { tr.classList.toggle('open'); e.target.textContent = tr.classList.contains('open') ? 'Less' : 'Read'; }
+  if (e.target.matches('.del')) {
+    if (!e.target.dataset.confirm) { e.target.dataset.confirm = '1'; e.target.textContent = 'Confirm delete'; setTimeout(() => { if (e.target.isConnected) { delete e.target.dataset.confirm; e.target.textContent = 'Delete'; } }, 4000); return; }
+    try { await api('/api/admin/enquiries/' + tr.dataset.id, {method:'DELETE'}); toast('Enquiry deleted'); load(); } catch (x) { toast(x.message); }
+  }
+});
+
+load();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shreedash IT Consulting</title>
+<meta name="description" content="Shreedash: IT staffing, web, desktop and mobile software, data engineering, AI applications, e-commerce and payment gateway integration. Internships in Data Engineering, Web Development and AI.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* VOICE confident business site, plain and specific
+   IDEA a system diagram: data flows in, gets engineered, powers AI, ships to apps and payments
+   PICTURE large illustrated pipeline from data sources through an AI core to web, desktop, mobile and a card terminal
+   COLOUR white ground, ink #101418, warm yellow #ffd84a as the one field, slate support
+   TYPE Manrope 800 display + Manrope text
+   LAYOUT laptop: title band across the top, diagram full width beneath; phone: title, diagram, buttons */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#101418);--ink:light-dark(#101418,#eef1f4);--mute:light-dark(#4a5562,#a7b1bc);--line:light-dark(#dde2e7,#2a323b);--soft:light-dark(#f3f5f7,#171d24);--y:#ffd84a;--yi:#101418;--slate:light-dark(#3c4a5a,#8fa1b4);--card:light-dark(#ffffff,#151b22)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip}
+a{color:inherit}
+img,svg{max-width:100%}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding-block:clamp(40px,6vw,88px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+h1,h2,h3{line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5vw,56px);font-weight:800}
+h2{font-size:clamp(28px,3.6vw,42px);font-weight:800}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.lede{font-size:clamp(17px,1.5vw,19px);color:var(--mute);max-width:62ch}
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px max(5vw,16px);flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.02em}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--y);display:grid;place-items:center;font-style:normal;color:var(--yi);font-size:17px}
+.links{display:flex;gap:4px;flex-wrap:wrap}
+.links a{text-decoration:none;padding:10px 12px;border-radius:8px;font-weight:600;font-size:15px;color:var(--mute)}
+.links a:hover{background:var(--soft);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:10px;font:700 16px Manrope,sans-serif;text-decoration:none;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.alt{background:transparent;color:var(--ink)}
+.btn:hover{filter:brightness(1.15)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.hero{padding-bottom:0}
+.hero .top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 56px;align-items:end}
+.hero .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.stage{margin-top:clamp(24px,4vw,48px);background:var(--y);border-radius:20px 20px 0 0;overflow:hidden}
+.stage svg{display:block;width:100%;height:auto}
+.stage text{font:700 15px Manrope,sans-serif;fill:#101418}
+.flow{offset-rotate:0deg;animation:run 5s linear infinite}
+@keyframes run{from{offset-distance:0%}to{offset-distance:100%}}
+@media(prefers-reduced-motion:reduce){.flow{animation:none;display:none}html{scroll-behavior:auto}}
+.strip{background:var(--ink);color:var(--bg)}
+.strip .wrap{display:flex;flex-wrap:wrap;gap:10px 32px;justify-content:space-between;font-weight:700;padding:18px max(5vw,16px)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 56px;align-items:end;margin-bottom:40px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.svc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.svc svg{width:44px;height:44px}
+.svc p{color:var(--mute)}
+.svc ul{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.svc li{font-size:13px;font-weight:600;background:var(--soft);padding:4px 10px;border-radius:99px}
+.soft{background:var(--soft)}
+.models{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:3px solid var(--ink)}
+.models div{padding:24px 20px 8px 0;border-right:1px solid var(--line);padding-left:20px}
+.models div:first-child{padding-left:0}
+.models div:last-child{border-right:0}
+.models b{display:block;font-size:19px;margin-bottom:8px}
+.models p{color:var(--mute);font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;counter-reset:s;margin-top:8px}
+.steps li{list-style:none;position:relative;padding-top:56px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;top:0;left:0;width:42px;height:42px;border-radius:50%;background:var(--y);color:var(--yi);display:grid;place-items:center;font-weight:800;font-size:18px}
+.steps li::after{content:"";position:absolute;top:21px;left:50px;right:-8px;height:2px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps b{display:block;font-size:17px;margin-bottom:4px}
+.steps p{color:var(--mute);font-size:15px}
+.steps{padding:0}
+.stack{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.stack span{border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600;font-size:15px;background:var(--card)}
+.intern{background:var(--y);color:var(--yi)}
+.intern .lede{color:#2c3540}
+.tracks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.track{background:#fff;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px;color:#101418}
+.track p,.track li{color:#3c4a5a;font-size:15px}
+.track ul{margin:0;padding-left:18px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:8px}
+.meta span{font-size:13px;font-weight:700;background:#101418;color:#fff;border-radius:99px;padding:4px 10px;white-space:nowrap}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:32px}
+.facts b{display:block;font-size:17px}
+.facts p{font-size:15px;color:#2c3540}
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px 64px}
+.info{display:grid;gap:20px;align-content:start;margin-top:28px}
+.info b{display:block;font-size:14px;color:var(--mute);font-weight:600}
+.info span{font-size:18px;font-weight:700}
+form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+form .full{grid-column:1/-1}
+label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+input,select,textarea{width:100%;font:16px Manrope,sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px}
+textarea{min-height:120px;resize:vertical}
+.err{color:#c4281c;font-size:14px;min-height:0}
+.ok{display:none;grid-column:1/-1;background:var(--soft);border-left:4px solid var(--y);padding:14px 16px;border-radius:8px}
+.note{font-size:13px;color:var(--mute)}
+footer{background:var(--ink);color:var(--bg)}
+footer .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
+footer h4{margin:0 0 10px;font-size:15px}
+footer a{display:block;text-decoration:none;opacity:.8;padding:4px 0;font-size:15px}
+footer a:hover{opacity:1}
+footer .bot{grid-column:1/-1;border-top:1px solid color-mix(in srgb,var(--bg) 20%,transparent);padding-top:20px;font-size:14px;opacity:.7;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:980px){.grid,.tracks{grid-template-columns:repeat(2,minmax(0,1fr))}.models,.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.models div:nth-child(3){padding-left:0}.models div:nth-child(2){border-right:0}.steps{grid-template-columns:minmax(0,1fr)}.steps li{padding:0 0 0 60px;min-height:48px}.steps li::after{display:none}footer .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}footer .wrap>div:first-child{grid-column:1/-1}}
+@media(max-width:760px){.hero .top,.head,.contact{grid-template-columns:minmax(0,1fr)}.links{display:none}}
+@media(max-width:600px){.grid,.tracks,.models,.facts,form{grid-template-columns:minmax(0,1fr)}.models div{padding-left:0;border-right:0;border-bottom:1px solid var(--line)}.stage{border-radius:14px 14px 0 0}footer .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top"><i>S</i>Shreedash</a>
+    <div class="links">
+      <a href="#services">Services</a>
+      <a href="#staffing">Staffing</a>
+      <a href="#process">How we work</a>
+      <a href="#internships">Internships</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a class="btn" href="#contact">Talk to us</a>
+  </div>
+</nav>
+
+<header class="band hero" id="top">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1>Software, data and AI teams that ship for your business</h1>
+      </div>
+      <div>
+        <p class="lede">Shreedash builds web, desktop and mobile applications, data platforms, AI features and online stores with secure payments. Need people instead? We place vetted engineers on your team.</p>
+        <div class="acts">
+          <a class="btn" href="#contact">Start a project</a>
+          <a class="btn alt" href="#staffing">Hire engineers</a>
+        </div>
+      </div>
+    </div>
+    <div class="stage" role="img" aria-label="Diagram: data from databases, files and APIs flows through a data pipeline into an AI engine, then out to web, desktop and mobile apps and a payment terminal">
+      <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3441"/><stop offset="1" stop-color="#101418"/></linearGradient>
+          <linearGradient id="cyl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3c4a5a"/><stop offset=".5" stop-color="#5b6b7d"/><stop offset="1" stop-color="#2a3441"/></linearGradient>
+          <g id="db"><rect x="-38" y="-30" width="76" height="60" fill="url(#cyl)"/><ellipse cx="0" cy="30" rx="38" ry="11" fill="#2a3441"/><ellipse cx="0" cy="-30" rx="38" ry="11" fill="#8fa1b4"/><path d="M-38 -6 q38 20 76 0" stroke="#8fa1b4" stroke-width="2" fill="none"/><path d="M-38 12 q38 20 76 0" stroke="#8fa1b4" stroke-width="2" fill="none"/></g>
+        </defs>
+        <!-- ground shadow plane -->
+        <rect x="0" y="370" width="1200" height="50" fill="#f0c52e"/>
+        <!-- pipes -->
+        <g fill="none" stroke="#101418" stroke-width="6" stroke-linecap="round" opacity=".85">
+          <path id="p1" d="M150 120 C260 120 260 210 340 210"/>
+          <path id="p2" d="M150 300 C260 300 260 210 340 210"/>
+          <path id="p3" d="M520 210 L640 210"/>
+          <path id="p4" d="M800 210 C880 210 880 95 960 95"/>
+          <path id="p5" d="M800 210 C880 210 880 210 960 230"/>
+          <path id="p6" d="M800 210 C880 210 880 330 960 330"/>
+        </g>
+        <!-- sources -->
+        <g transform="translate(100,110)"><ellipse cx="0" cy="55" rx="50" ry="8" fill="#101418" opacity=".15"/><use href="#db"/></g>
+        <g transform="translate(100,290)"><ellipse cx="0" cy="55" rx="50" ry="8" fill="#101418" opacity=".15"/><use href="#db"/></g>
+        <text x="100" y="190" text-anchor="middle">Databases</text>
+        <text x="100" y="370" text-anchor="middle" dy="-2">Files and APIs</text>
+        <!-- pipeline block -->
+        <g transform="translate(340,150)">
+          <rect x="6" y="10" width="180" height="120" rx="14" fill="#101418" opacity=".18"/>
+          <rect width="180" height="120" rx="14" fill="#ffffff"/>
+          <rect width="180" height="120" rx="14" fill="none" stroke="#101418" stroke-width="3"/>
+          <g fill="#3c4a5a"><rect x="22" y="30" width="40" height="14" rx="4"/><rect x="70" y="30" width="88" height="14" rx="4" opacity=".5"/><rect x="22" y="54" width="100" height="14" rx="4" opacity=".7"/><rect x="130" y="54" width="28" height="14" rx="4"/><rect x="22" y="78" width="60" height="14" rx="4" opacity=".5"/><rect x="90" y="78" width="68" height="14" rx="4"/></g>
+        </g>
+        <text x="430" y="300" text-anchor="middle">Data engineering</text>
+        <!-- AI core -->
+        <g transform="translate(720,210)">
+          <circle r="92" fill="#101418" opacity=".14" cx="8" cy="12"/>
+          <circle r="84" fill="#101418"/>
+          <circle r="84" fill="none" stroke="#ffffff" stroke-width="2" opacity=".25"/>
+          <g stroke="#ffd84a" stroke-width="3" fill="#ffd84a">
+            <line x1="-40" y1="-30" x2="0" y2="-40"/><line x1="-40" y1="-30" x2="0" y2="0"/><line x1="-40" y1="30" x2="0" y2="0"/><line x1="-40" y1="30" x2="0" y2="40"/><line x1="0" y1="-40" x2="40" y2="0"/><line x1="0" y1="0" x2="40" y2="0"/><line x1="0" y1="40" x2="40" y2="0"/><line x1="-40" y1="-30" x2="0" y2="40" opacity=".4"/><line x1="-40" y1="30" x2="0" y2="-40" opacity=".4"/>
+            <circle cx="-40" cy="-30" r="8"/><circle cx="-40" cy="30" r="8"/><circle cx="0" cy="-40" r="8"/><circle cx="0" cy="0" r="8"/><circle cx="0" cy="40" r="8"/><circle cx="40" cy="0" r="10" fill="#ffffff" stroke="#ffffff"/>
+          </g>
+        </g>
+        <text x="720" y="335" text-anchor="middle">AI applications</text>
+        <!-- web browser window -->
+        <g transform="translate(960,40)">
+          <rect x="6" y="8" width="170" height="104" rx="10" fill="#101418" opacity=".18"/>
+          <rect width="170" height="104" rx="10" fill="#ffffff" stroke="#101418" stroke-width="3"/>
+          <path d="M0 10 a10 10 0 0 1 10 -10 h150 a10 10 0 0 1 10 10 v12 h-170z" fill="#101418"/>
+          <circle cx="14" cy="11" r="3.5" fill="#ff7a6b"/><circle cx="26" cy="11" r="3.5" fill="#ffd84a"/><circle cx="38" cy="11" r="3.5" fill="#6fd08c"/>
+          <rect x="14" y="34" width="70" height="56" rx="6" fill="#ffd84a"/><rect x="94" y="34" width="62" height="10" rx="3" fill="#3c4a5a"/><rect x="94" y="52" width="48" height="8" rx="3" fill="#8fa1b4"/><rect x="94" y="68" width="40" height="18" rx="5" fill="#101418"/>
+        </g>
+        <!-- desktop monitor -->
+        <g transform="translate(960,180)">
+          <rect x="6" y="8" width="110" height="74" rx="8" fill="#101418" opacity=".18"/>
+          <rect width="110" height="74" rx="8" fill="url(#scr)" stroke="#101418" stroke-width="3"/>
+          <rect x="10" y="10" width="28" height="54" rx="3" fill="#3c4a5a"/><rect x="44" y="10" width="56" height="24" rx="3" fill="#ffd84a"/><rect x="44" y="40" width="56" height="24" rx="3" fill="#5b6b7d"/>
+          <path d="M45 74 h20 l6 18 h-32z" fill="#3c4a5a"/><rect x="30" y="92" width="50" height="6" rx="3" fill="#101418"/>
+        </g>
+        <!-- phone -->
+        <g transform="translate(1085,170)">
+          <rect x="5" y="8" width="62" height="118" rx="14" fill="#101418" opacity=".18"/>
+          <rect width="62" height="118" rx="14" fill="#101418"/>
+          <rect x="6" y="14" width="50" height="88" rx="6" fill="#ffffff"/>
+          <rect x="12" y="22" width="38" height="26" rx="4" fill="#ffd84a"/><rect x="12" y="54" width="38" height="6" rx="3" fill="#3c4a5a"/><rect x="12" y="66" width="26" height="6" rx="3" fill="#8fa1b4"/><rect x="12" y="82" width="38" height="12" rx="4" fill="#101418"/>
+          <rect x="22" y="6" width="18" height="4" rx="2" fill="#3c4a5a"/>
+        </g>
+        <!-- payment terminal -->
+        <g transform="translate(960,300)">
+          <rect x="6" y="8" width="96" height="66" rx="10" fill="#101418" opacity=".18"/>
+          <rect width="96" height="66" rx="10" fill="#3c4a5a" stroke="#101418" stroke-width="3"/>
+          <rect x="10" y="10" width="44" height="22" rx="3" fill="#cfe9d6"/>
+          <g fill="#8fa1b4"><rect x="10" y="40" width="10" height="8" rx="2"/><rect x="24" y="40" width="10" height="8" rx="2"/><rect x="38" y="40" width="10" height="8" rx="2"/><rect x="10" y="52" width="10" height="8" rx="2"/><rect x="24" y="52" width="10" height="8" rx="2"/><rect x="38" y="52" width="10" height="8" rx="2"/></g>
+          <rect x="62" y="-14" width="58" height="38" rx="5" fill="#ffffff" stroke="#101418" stroke-width="2.5" transform="rotate(-10 90 5)"/>
+          <rect x="68" y="-6" width="12" height="9" rx="2" fill="#ffd84a" transform="rotate(-10 90 5)"/>
+        </g>
+        <text x="1045" y="30" text-anchor="middle">Web</text>
+        <text x="1015" y="300" text-anchor="end" dx="-62">Desktop</text>
+        <text x="1116" y="310" text-anchor="middle">Mobile</text>
+        <text x="1080" y="395" text-anchor="middle">e-Commerce and payments</text>
+        <!-- moving data tokens -->
+        <g fill="#ffffff" stroke="#101418" stroke-width="2.5">
+          <circle class="flow" r="7" style="offset-path:path('M150 120 C260 120 260 210 340 210')"/>
+          <circle class="flow" r="7" style="offset-path:path('M150 300 C260 300 260 210 340 210');animation-delay:-2.5s"/>
+          <circle class="flow" r="7" style="offset-path:path('M520 210 L640 210');animation-duration:2.5s"/>
+          <circle class="flow" r="7" style="offset-path:path('M800 210 C880 210 880 95 960 95');animation-duration:3s"/>
+          <circle class="flow" r="7" style="offset-path:path('M800 210 C880 210 880 210 960 230');animation-duration:3s;animation-delay:-1s"/>
+          <circle class="flow" r="7" style="offset-path:path('M800 210 C880 210 880 330 960 330');animation-duration:3s;animation-delay:-2s"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="strip"><div class="wrap"><span>IT staffing</span><span>Web, desktop and mobile</span><span>Data engineering</span><span>AI applications</span><span>e-Commerce</span><span>Payment gateways</span></div></div>
+
+<section class="band" id="services">
+  <div class="wrap">
+    <div class="head">
+      <h2>One partner from first sketch to production</h2>
+      <p class="lede">Pick a single service or combine them. The same team that designs your data platform can build the app that runs on it and the checkout that earns from it.</p>
+    </div>
+    <div class="grid" id="svcGrid"></div>
+  </div>
+</section>
+
+<section class="band soft" id="staffing">
+  <div class="wrap">
+    <div class="head">
+      <h2>IT staffing that fits how you hire</h2>
+      <p class="lede">We screen every candidate on real technical work before you meet them, so your interviews go to people who can already do the job.</p>
+    </div>
+    <div class="models">
+      <div><b>Contract</b><p>Skilled engineers for a fixed term or a project spike. Start in days, scale up or down as work changes.</p></div>
+      <div><b>Contract to hire</b><p>Work together first, then convert the engineer to your payroll when you are both sure of the fit.</p></div>
+      <div><b>Direct hire</b><p>We search, screen and shortlist for permanent roles. You make the final call and the offer.</p></div>
+      <div><b>Dedicated team</b><p>A managed squad of developers, data engineers and QA working only on your product, with a lead who reports to you.</p></div>
+    </div>
+    <h3 style="margin-top:48px">Roles we place</h3>
+    <div class="stack" id="roles"></div>
+  </div>
+</section>
+
+<section class="band" id="process">
+  <div class="wrap">
+    <div class="head">
+      <h2>How a project runs</h2>
+      <p class="lede">Short cycles, working software every two weeks, and a single point of contact who knows your project inside out.</p>
+    </div>
+    <ol class="steps">
+      <li><b>Discover</b><p>A free call to understand your goals, users, budget and timeline.</p></li>
+      <li><b>Plan</b><p>Scope, architecture and a fixed or time-and-materials estimate you can approve.</p></li>
+      <li><b>Build</b><p>Two-week sprints with demos, so you see progress and steer early.</p></li>
+      <li><b>Launch</b><p>Testing, security checks, deployment to your cloud and team handover.</p></li>
+      <li><b>Support</b><p>Monitoring, fixes and new features on a plan that suits you.</p></li>
+    </ol>
+    <h3 style="margin-top:56px">Technologies we work with</h3>
+    <div class="stack" id="tech"></div>
+  </div>
+</section>
+
+<section class="band intern" id="internships">
+  <div class="wrap">
+    <div class="head">
+      <h2>Internships that end with real work in your portfolio</h2>
+      <p class="lede">Learn by building alongside our engineers. Each intern ships a project you can show to employers, with code reviews and weekly mentoring along the way.</p>
+    </div>
+    <div class="tracks" id="tracks"></div>
+    <div class="facts">
+      <div><b>Who can apply</b><p>Students, recent graduates and career changers with basic programming knowledge.</p></div>
+      <div><b>Format</b><p>Remote or hybrid, with live sessions, code reviews and a mentor.</p></div>
+      <div><b>What you get</b><p>A finished portfolio project, a completion certificate and a reference.</p></div>
+      <div><b>Next step</b><p>Choose a track in the form below and tell us about yourself.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contact">
+  <div class="wrap contact">
+    <div>
+      <h2>Tell us what you need</h2>
+      <p class="lede" style="margin-top:16px">A project, engineers for your team, or an internship place. We reply within one business day.</p>
+      <div class="info">
+        <div><b>Email</b><span>hello@shreedash.example</span></div>
+        <div><b>Phone</b><span>+1 (555) 010-2040</span></div>
+        <div><b>Office</b><span>Address to be confirmed</span></div>
+        <div><b>Hours</b><span>Mon to Fri, 9:00 to 18:00</span></div>
+      </div>
+      <p class="note" style="margin-top:20px">Contact details shown are placeholders.</p>
+    </div>
+    <form id="f" novalidate>
+      <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
+      <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      <div><label for="company">Company or college</label><input id="company" name="company" autocomplete="organization"></div>
+      <div><label for="topic">I am interested in</label>
+        <select id="topic" name="topic">
+          <option>Software development</option><option>IT staffing</option><option>Data engineering</option><option>AI applications</option><option>e-Commerce and payments</option><option>Internship: Data Engineering</option><option>Internship: Web Development</option><option>Internship: AI Applications</option>
+        </select></div>
+      <div class="full"><label for="msg">How can we help?</label><textarea id="msg" name="msg" required></textarea></div>
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <p class="err full" id="err" aria-live="polite"></p>
+      <div class="full"><button class="btn" type="submit">Send message</button></div>
+      <div class="ok" id="ok" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<footer class="band">
+  <div class="wrap">
+    <div><a class="logo" href="#top" style="opacity:1"><i>S</i>Shreedash</a><p style="opacity:.75;margin-top:12px;max-width:36ch">IT consulting, staffing and software development for growing businesses.</p></div>
+    <div><h4>Services</h4><a href="#services">Software development</a><a href="#services">Data engineering</a><a href="#services">AI applications</a><a href="#services">e-Commerce and payments</a></div>
+    <div><h4>Company</h4><a href="#staffing">IT staffing</a><a href="#process">How we work</a><a href="#internships">Internships</a></div>
+    <div><h4>Contact</h4><a href="#contact">hello@shreedash.example</a><a href="#contact">+1 (555) 010-2040</a></div>
+    <div class="bot"><span>© <span id="yr">2026</span> Shreedash. All rights reserved.</span><span>Privacy · Terms</span></div>
+  </div>
+</footer>
+
+<script>
+{
+const ic = {
+  web:'<rect x="4" y="8" width="36" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 15h36" stroke="currentColor" stroke-width="3"/><rect x="9" y="20" width="12" height="10" rx="2" fill="#ffd84a"/>',
+  desk:'<rect x="4" y="6" width="36" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M16 38h12M22 30v8" stroke="currentColor" stroke-width="3"/><rect x="9" y="11" width="10" height="14" rx="2" fill="#ffd84a"/>',
+  mob:'<rect x="12" y="3" width="20" height="38" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><rect x="16" y="10" width="12" height="10" rx="2" fill="#ffd84a"/><path d="M19 35h6" stroke="currentColor" stroke-width="3"/>',
+  data:'<ellipse cx="22" cy="10" rx="15" ry="5" fill="#ffd84a" stroke="currentColor" stroke-width="3"/><path d="M7 10v24c0 3 7 5 15 5s15-2 15-5V10M7 22c0 3 7 5 15 5s15-2 15-5" fill="none" stroke="currentColor" stroke-width="3"/>',
+  ai:'<g stroke="currentColor" stroke-width="2.5"><path d="M9 12l13 10M9 32l13-10M22 22h13M22 8v28" fill="none"/></g><circle cx="9" cy="12" r="4" fill="currentColor"/><circle cx="9" cy="32" r="4" fill="currentColor"/><circle cx="22" cy="22" r="5" fill="#ffd84a" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="22" r="4" fill="currentColor"/><circle cx="22" cy="8" r="3" fill="currentColor"/><circle cx="22" cy="36" r="3" fill="currentColor"/>',
+  shop:'<path d="M5 8h5l4 20h20l4-14H13" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="17" cy="36" r="3" fill="currentColor"/><circle cx="31" cy="36" r="3" fill="currentColor"/><rect x="17" y="16" width="16" height="7" rx="2" fill="#ffd84a"/>',
+  pay:'<rect x="4" y="9" width="36" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 17h36" stroke="currentColor" stroke-width="5"/><rect x="9" y="24" width="10" height="6" rx="1.5" fill="#ffd84a"/>',
+  team:'<circle cx="15" cy="14" r="6" fill="#ffd84a" stroke="currentColor" stroke-width="3"/><circle cx="30" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 38c0-7 5-12 11-12s11 5 11 12M26 38c0-6 2-10 6-10s8 4 8 10" fill="none" stroke="currentColor" stroke-width="3"/>',
+  qa:'<path d="M22 4l15 6v10c0 9-6 16-15 20C13 36 7 29 7 20V10z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 21l5 5 9-10" fill="none" stroke="#e0b000" stroke-width="3.5" stroke-linecap="round"/>'
+};
+const svcs = [
+  ['web','Web development','Fast, accessible websites, portals and SaaS products with clean admin dashboards and APIs.',['React','Angular','Node.js','.NET','Django']],
+  ['desk','Desktop applications','Reliable Windows, macOS and cross-platform tools for operations, retail counters and field teams.',['.NET / WPF','Electron','Java','Qt']],
+  ['mob','Mobile apps','Native and cross-platform apps for iOS and Android, from MVP to store release and updates.',['Flutter','React Native','Swift','Kotlin']],
+  ['data','Data engineering','Pipelines, warehouses and lakehouses that turn scattered data into trusted reports and dashboards.',['Spark','Airflow','Snowflake','Databricks','Power BI']],
+  ['ai','AI applications','Chat assistants, document search, forecasting and automation built on your own data, with guardrails.',['LLMs','RAG','Python','MLOps']],
+  ['shop','e-Commerce applications','Online stores and marketplaces with catalogue, inventory, orders, shipping and customer accounts.',['Shopify','WooCommerce','Magento','Headless']],
+  ['pay','Payment gateway integration','Secure checkout, subscriptions, refunds and reconciliation, built with PCI DSS practices in mind.',['Stripe','PayPal','Razorpay','Authorize.Net','UPI']],
+  ['team','IT staffing','Vetted developers, data engineers and testers on contract, contract to hire or direct hire.',['Contract','C2H','Direct hire']],
+  ['qa','Testing and support','Manual and automated testing, performance checks, cloud deployment and ongoing maintenance.',['Selenium','Cypress','AWS','Azure']]
+];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+document.getElementById('svcGrid').innerHTML = svcs.map(([k,t,d,tags]) =>
+  `<article class="svc"><svg viewBox="0 0 44 44" aria-hidden="true">${ic[k]}</svg><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${tags.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></article>`).join('');
+
+const roles = ['Full-stack developers','Front-end engineers','Java and .NET developers','Python developers','Mobile developers','Data engineers','Data analysts','ML and AI engineers','Cloud and DevOps engineers','QA automation engineers','Business analysts','Project managers'];
+document.getElementById('roles').innerHTML = roles.map(r=>`<span>${esc(r)}</span>`).join('');
+
+const tech = ['JavaScript','TypeScript','React','Angular','Node.js','Python','Java','C# and .NET','Flutter','Kotlin','Swift','SQL','PostgreSQL','MongoDB','Apache Spark','Kafka','Airflow','Snowflake','Databricks','AWS','Azure','Google Cloud','Docker','Kubernetes'];
+document.getElementById('tech').innerHTML = tech.map(r=>`<span>${esc(r)}</span>`).join('');
+
+const tracks = [
+  ['data','Data Engineering','Build a working data pipeline end to end, from raw files to a live dashboard.',['SQL and data modelling','Python and PySpark','Airflow scheduling','Cloud warehouse and BI'],'12 weeks'],
+  ['web','Web Development','Design, build and deploy a full-stack web application with sign-in and a database.',['HTML, CSS and JavaScript','React front end','Node.js or Python APIs','Git, testing and deployment'],'12 weeks'],
+  ['ai','AI Applications','Create an AI assistant that answers questions from real documents.',['Python for machine learning','Prompting and LLM APIs','Retrieval and vector search','Evaluating and shipping a model'],'12 weeks']
+];
+document.getElementById('tracks').innerHTML = tracks.map(([k,t,d,l,w]) =>
+  `<article class="track"><svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true" style="color:#101418">${ic[k]}</svg><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="meta"><span>${esc(w)}</span><span>Remote or hybrid</span><span>Mentor led</span></div></article>`).join('');
+
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const f = document.getElementById('f'), err = document.getElementById('err'), ok = document.getElementById('ok');
+const btn = f.querySelector('button[type=submit]');
+f.addEventListener('submit', async e => {
+  e.preventDefault();
+  const data = {name: f.name.value.trim(), email: f.email.value.trim(), company: f.company.value.trim(), topic: f.topic.value, message: f.msg.value.trim(), website: f.website.value};
+  if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) || !data.message) {
+    err.textContent = 'Please add your name, a valid email and a short message.';
+    return;
+  }
+  err.textContent = '';
+  ok.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const r = await fetch('/api/contact', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.error || 'Something went wrong. Please try again.');
+    f.reset();
+    ok.style.display = 'block';
+    ok.textContent = 'Thanks, ' + data.name + '. We received your message about "' + data.topic + '" and will reply within one business day.';
+  } catch (x) {
+    err.textContent = (x instanceof TypeError) ? 'Could not reach the server. Please try again, or email us directly.' : x.message;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Send message';
+  }
+});
+}
+</script>
+</body>
+</html>
