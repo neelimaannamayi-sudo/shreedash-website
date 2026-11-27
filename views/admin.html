@@ -5,29 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>Enquiries · Shreedash admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light dark;--bg:light-dark(#f3f5f7,#101418);--card:light-dark(#fff,#171d24);--ink:light-dark(#101418,#eef1f4);--mute:light-dark(#4a5562,#a7b1bc);--line:light-dark(#dde2e7,#2a323b);--y:#ffd84a}
+:root{color-scheme:light dark;--bg:light-dark(#f6f3ff,#120a2a);--card:light-dark(#fff,#171d24);--ink:light-dark(#101418,#eef1f4);--mute:light-dark(#4a5562,#a7b1bc);--line:light-dark(#dde2e7,#2a323b);--y:#ffc93c;--v:#5b21d6}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Manrope,system-ui,sans-serif}
-header{background:#101418;color:#fff}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 "Plus Jakarta Sans",system-ui,sans-serif}
+header{background:linear-gradient(120deg,#1d0b4a,#3a149c);color:#fff}
 header .in,main{max-width:1240px;margin:0 auto;padding:14px max(4vw,16px)}
 header .in{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:#fff;text-decoration:none}
-.logo i{width:28px;height:28px;border-radius:8px;background:var(--y);display:grid;place-items:center;font-style:normal;color:#101418}
+.logo i{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#5b21d6,#7c4dff);display:grid;place-items:center;font-style:normal;color:#fff}
 .logo small{font-weight:600;opacity:.7;font-size:14px}
 .hbtn{display:flex;gap:8px}
-button,.btn{font:700 14px Manrope,sans-serif;min-height:40px;padding:0 14px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
-header button,header .btn{background:transparent;color:#fff;border-color:#3c4a5a}
+button,.btn{font:700 14px "Plus Jakarta Sans",sans-serif;min-height:40px;padding:0 14px;border-radius:9px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center}
+header button,header .btn{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
 button:focus-visible,.btn:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--y);outline-offset:2px}
 h1{font-size:30px;letter-spacing:-.02em;margin:18px 0 16px}
 .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
 .tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-align:left;display:block;min-height:0;font-weight:400}
 .tile b{display:block;font-size:28px;font-weight:800;line-height:1.1}
 .tile span{color:var(--mute);font-size:14px}
-.tile.on{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.tile.on{border-color:var(--v);box-shadow:inset 0 0 0 1px var(--v);background:light-dark(#f3eeff,#241a44)}
+.tile b{color:var(--v)}
 .bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px}
-.bar input,.bar select{font:16px Manrope,sans-serif;min-height:44px;padding:8px 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink)}
+.bar input,.bar select{font:16px "Plus Jakarta Sans",sans-serif;min-height:44px;padding:8px 12px;border:1.5px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink)}
 .bar input{flex:1 1 240px}
 .wrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow-x:auto}
 table{width:100%;border-collapse:collapse}
@@ -40,14 +41,14 @@ td.when{white-space:nowrap;color:var(--mute);font-size:14px}
 .msg{color:var(--mute);max-width:46ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap}
 tr.open .msg{-webkit-line-clamp:unset;color:var(--ink)}
 .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--bg);white-space:nowrap}
-td select{font:14px Manrope,sans-serif;min-height:38px;border:1.5px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);padding:4px 8px}
+td select{font:14px "Plus Jakarta Sans",sans-serif;min-height:38px;border:1.5px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);padding:4px 8px}
 .st-new{border-color:#e0b000 !important}
 .acts{display:flex;gap:6px;flex-wrap:wrap}
 .acts button{min-height:36px;padding:0 10px;font-size:13px}
 .danger{color:#b3261e}
 .empty{padding:40px;text-align:center;color:var(--mute)}
 .pager{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:14px 0 40px;color:var(--mute);flex-wrap:wrap}
-.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#101418;color:#fff;padding:10px 16px;border-radius:10px;display:none;z-index:5}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1d0b4a;color:#fff;padding:10px 16px;border-radius:10px;display:none;z-index:5}
 @media(max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}thead{display:none}tr{display:grid;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}td{border:0;padding:0}.msg{max-width:none}}
 </style>
 </head>

@@ -5,307 +5,545 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shreedash IT Consulting</title>
 <meta name="description" content="Shreedash: IT staffing, web, desktop and mobile software, data engineering, AI applications, e-commerce and payment gateway integration. Internships in Data Engineering, Web Development and AI.">
+<meta name="theme-color" content="#5b21d6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* VOICE confident business site, plain and specific
-   IDEA a system diagram: data flows in, gets engineered, powers AI, ships to apps and payments
-   PICTURE large illustrated pipeline from data sources through an AI core to web, desktop, mobile and a card terminal
-   COLOUR white ground, ink #101418, warm yellow #ffd84a as the one field, slate support
-   TYPE Manrope 800 display + Manrope text
-   LAYOUT laptop: title band across the top, diagram full width beneath; phone: title, diagram, buttons */
-:root{color-scheme:light dark;--bg:light-dark(#ffffff,#101418);--ink:light-dark(#101418,#eef1f4);--mute:light-dark(#4a5562,#a7b1bc);--line:light-dark(#dde2e7,#2a323b);--soft:light-dark(#f3f5f7,#171d24);--y:#ffd84a;--yi:#101418;--slate:light-dark(#3c4a5a,#8fa1b4);--card:light-dark(#ffffff,#151b22)}
-:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+/* VOICE confident, modern IT services company; clean and corporate
+   IDEA a technology partner's brochure: violet brand fields, white space, yellow highlights on what matters
+   PICTURE illustrated data-to-apps system in the hero, team-at-work illustration in the pillars section
+   COLOUR white ground, violet #5b21d6 dominant, deep violet #1d0b4a support, yellow #ffc93c accent
+   TYPE Plus Jakarta Sans 800 display + Plus Jakarta Sans text
+   LAYOUT laptop: violet hero with text left and picture right, cards overlapping its base; phone: stacked */
+:root{--v:#5b21d6;--v2:#7c4dff;--vd:#1d0b4a;--vl:#f3eeff;--y:#ffc93c;--ink:#14102a;--mute:#5b5873;--line:#e7e2f3;--bg:#ffffff;--card:#ffffff}
 *{box-sizing:border-box;min-width:0}
-html{scroll-behavior:smooth;scroll-padding-top:72px}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip}
 a{color:inherit}
 img,svg{max-width:100%}
-.wrap{max-width:1240px;margin:0 auto}
-.band{padding-block:clamp(40px,6vw,88px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
-h1,h2,h3{line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
-h1{font-size:clamp(34px,5vw,56px);font-weight:800}
-h2{font-size:clamp(28px,3.6vw,42px);font-weight:800}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+.band{padding-block:clamp(56px,7vw,104px)}
+h1,h2,h3{line-height:1.1;letter-spacing:-.025em;text-wrap:balance;margin:0}
+h1{font-size:clamp(36px,5.2vw,62px);font-weight:800}
+h2{font-size:clamp(30px,3.6vw,44px);font-weight:800}
 h3{font-size:19px;font-weight:700}
 p{margin:0}
-.lede{font-size:clamp(17px,1.5vw,19px);color:var(--mute);max-width:62ch}
-nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px max(5vw,16px);flex-wrap:wrap}
-.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px;text-decoration:none;letter-spacing:-.02em}
-.logo i{width:30px;height:30px;border-radius:8px;background:var(--y);display:grid;place-items:center;font-style:normal;color:var(--yi);font-size:17px}
-.links{display:flex;gap:4px;flex-wrap:wrap}
-.links a{text-decoration:none;padding:10px 12px;border-radius:8px;font-weight:600;font-size:15px;color:var(--mute)}
-.links a:hover{background:var(--soft);color:var(--ink)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:10px;font:700 16px Manrope,sans-serif;text-decoration:none;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer}
-.btn.alt{background:transparent;color:var(--ink)}
-.btn:hover{filter:brightness(1.15)}
-.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--y);outline-offset:2px}
-.hero{padding-bottom:0}
-.hero .top{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:24px 56px;align-items:end}
-.hero .acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.stage{margin-top:clamp(24px,4vw,48px);background:var(--y);border-radius:20px 20px 0 0;overflow:hidden}
-.stage svg{display:block;width:100%;height:auto}
-.stage text{font:700 15px Manrope,sans-serif;fill:#101418}
-.flow{offset-rotate:0deg;animation:run 5s linear infinite}
+.tag{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:var(--v);margin-bottom:14px}
+.tag::before{content:"";width:22px;height:3px;border-radius:2px;background:var(--y)}
+.lede{font-size:clamp(17px,1.4vw,19px);color:var(--mute);max-width:60ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 24px;border-radius:999px;font:700 16px "Plus Jakarta Sans",sans-serif;text-decoration:none;border:2px solid var(--v);background:var(--v);color:#fff;cursor:pointer;transition:transform .15s,background .15s}
+.btn:hover{background:#4a16b8;border-color:#4a16b8;transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--v)}
+.btn.ghost:hover{background:var(--vl)}
+.btn.yel{background:var(--y);border-color:var(--y);color:var(--vd)}
+.btn.yel:hover{background:#ffbb0f;border-color:#ffbb0f}
+.btn.line{background:transparent;border-color:rgba(255,255,255,.5);color:#fff}
+.btn.line:hover{background:rgba(255,255,255,.1)}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,button:focus-visible{outline:3px solid var(--y);outline-offset:2px}
+.arrow::after{content:"→";font-weight:700}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:72px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;text-decoration:none;letter-spacing:-.03em;color:var(--vd)}
+.logo i{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--v),var(--v2));display:grid;place-items:center;font-style:normal;color:#fff;font-size:19px;position:relative}
+.logo i::after{content:"";position:absolute;right:-3px;top:-3px;width:11px;height:11px;border-radius:50%;background:var(--y);border:2px solid #fff}
+.links{display:flex;gap:2px;align-items:center}
+.links a{text-decoration:none;padding:10px 13px;border-radius:10px;font-weight:600;font-size:15px;color:var(--mute)}
+.links a:hover{color:var(--v);background:var(--vl)}
+.menu{display:none;background:none;border:1.5px solid var(--line);border-radius:10px;width:46px;height:46px;cursor:pointer;color:var(--vd)}
+.menu svg{width:22px;height:22px}
+
+/* hero */
+.hero{background:radial-gradient(1200px 500px at 85% -10%,#8b5cff 0%,transparent 60%),linear-gradient(160deg,var(--vd) 0%,#3a149c 55%,var(--v) 100%);color:#fff;padding-block:clamp(56px,7vw,96px) clamp(120px,12vw,170px);position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:1px;background:rgba(255,255,255,.12)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:40px;align-items:center}
+.hero .tag{color:#d9c9ff}
+.hero h1 span{color:var(--y)}
+.hero .lede{color:#ddd3ff;margin-top:20px}
+.acts{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.hero .note{margin-top:28px;display:flex;gap:10px 22px;flex-wrap:wrap;font-weight:600;font-size:15px;color:#d9c9ff}
+.hero .note span::before{content:"✓";color:var(--y);margin-right:8px;font-weight:800}
+.scene svg{display:block;width:100%;height:auto;filter:drop-shadow(0 30px 40px rgba(10,0,40,.35))}
+.scene text{font:700 15px "Plus Jakarta Sans",sans-serif;fill:#fff}
+.flow{animation:run 5s linear infinite}
 @keyframes run{from{offset-distance:0%}to{offset-distance:100%}}
-@media(prefers-reduced-motion:reduce){.flow{animation:none;display:none}html{scroll-behavior:auto}}
-.strip{background:var(--ink);color:var(--bg)}
-.strip .wrap{display:flex;flex-wrap:wrap;gap:10px 32px;justify-content:space-between;font-weight:700;padding:18px max(5vw,16px)}
-.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px 56px;align-items:end;margin-bottom:40px}
+@media(prefers-reduced-motion:reduce){.flow{animation:none;display:none}html{scroll-behavior:auto}.btn{transition:none}}
+
+/* value cards overlapping hero */
+.values{margin-top:clamp(-110px,-9vw,-80px);position:relative;z-index:2}
+.vgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.vcard{background:#fff;border-radius:20px;padding:26px;box-shadow:0 18px 40px rgba(40,10,110,.12);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.vcard .ic{width:52px;height:52px;border-radius:14px;background:var(--vl);display:grid;place-items:center;color:var(--v)}
+.vcard .ic svg{width:30px;height:30px}
+.vcard p{color:var(--mute);font-size:15px}
+
+/* about */
+.about .top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 64px;align-items:end;margin-bottom:44px}
+.trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.trio div{padding:28px 28px 0 0}
+.trio div+div{padding-left:28px;border-left:1px solid var(--line)}
+.trio b{display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:10px;color:var(--vd)}
+.trio b::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--y);box-shadow:0 0 0 4px #fff3cf}
+.trio p{color:var(--mute)}
+
+/* services */
+.soft{background:var(--vl)}
+.head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px 56px;align-items:end;margin-bottom:44px}
+.head .acts{margin-top:18px}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.svc{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:12px}
-.svc svg{width:44px;height:44px}
-.svc p{color:var(--mute)}
-.svc ul{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
-.svc li{font-size:13px;font-weight:600;background:var(--soft);padding:4px 10px;border-radius:99px}
-.soft{background:var(--soft)}
-.models{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:3px solid var(--ink)}
-.models div{padding:24px 20px 8px 0;border-right:1px solid var(--line);padding-left:20px}
-.models div:first-child{padding-left:0}
-.models div:last-child{border-right:0}
-.models b{display:block;font-size:19px;margin-bottom:8px}
-.models p{color:var(--mute);font-size:15px}
-.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;counter-reset:s;margin-top:8px}
-.steps li{list-style:none;position:relative;padding-top:56px}
-.steps li::before{counter-increment:s;content:counter(s);position:absolute;top:0;left:0;width:42px;height:42px;border-radius:50%;background:var(--y);color:var(--yi);display:grid;place-items:center;font-weight:800;font-size:18px}
-.steps li::after{content:"";position:absolute;top:21px;left:50px;right:-8px;height:2px;background:var(--line)}
+.svc{background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:12px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.svc:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(60,20,150,.12);border-color:#d5c7fb}
+.svc .ic{width:54px;height:54px;border-radius:15px;background:var(--vl);display:grid;place-items:center;color:var(--v)}
+.svc .ic svg{width:32px;height:32px}
+.svc p{color:var(--mute);font-size:15px}
+.svc ul{margin:auto 0 0;padding:6px 0 0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.svc li{font-size:13px;font-weight:600;background:var(--vl);color:#43209e;padding:4px 10px;border-radius:99px}
+
+/* feature split */
+.split{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.feat{border-radius:24px;overflow:hidden;color:#fff;display:flex;flex-direction:column;min-height:440px;position:relative}
+.feat.a{background:linear-gradient(150deg,#3a149c,var(--v))}
+.feat.b{background:linear-gradient(150deg,var(--vd),#3a149c)}
+.feat .art{flex:1;min-height:240px;position:relative;margin:28px 28px 8px}
+.feat .art svg{position:absolute;inset:0;width:100%;height:100%}
+.feat .txt{padding:0 32px 32px;display:flex;flex-direction:column;gap:12px}
+.feat p{color:#ddd3ff}
+.feat ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.feat li{font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.3);padding:5px 12px;border-radius:99px}
+.feat .btn{align-self:flex-start;margin-top:6px}
+
+/* pillars */
+.pillars .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center}
+.team{background:var(--vl);border-radius:28px;overflow:hidden}
+.team svg{display:block;width:100%;height:auto}
+.pgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:30px}
+.pill{border:1px solid var(--line);border-radius:18px;padding:20px}
+.pill b{display:block;font-size:24px;font-weight:800;color:var(--v);letter-spacing:-.02em}
+.pill b::after{content:".";color:var(--y)}
+.pill p{color:var(--mute);font-size:15px;margin-top:4px}
+
+/* staffing */
+.models{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.model{background:#fff;border-radius:20px;padding:26px;border:1px solid var(--line);border-top:4px solid var(--v)}
+.model:nth-child(2){border-top-color:var(--v2)}
+.model:nth-child(3){border-top-color:var(--y)}
+.model:nth-child(4){border-top-color:var(--vd)}
+.model b{display:block;font-size:19px;margin-bottom:8px;color:var(--vd)}
+.model p{color:var(--mute);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chips span{border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-weight:600;font-size:15px;background:#fff}
+h3.sub{margin-top:48px}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;counter-reset:s;margin:0;padding:0}
+.steps li{list-style:none;position:relative;padding-top:64px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;top:0;left:0;width:48px;height:48px;border-radius:15px;background:var(--v);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
+.steps li:nth-child(odd)::before{background:var(--y);color:var(--vd)}
+.steps li::after{content:"";position:absolute;top:24px;left:58px;right:-10px;border-top:2px dashed #cfc2f5}
 .steps li:last-child::after{display:none}
-.steps b{display:block;font-size:17px;margin-bottom:4px}
+.steps b{display:block;font-size:18px;margin-bottom:4px;color:var(--vd)}
 .steps p{color:var(--mute);font-size:15px}
-.steps{padding:0}
-.stack{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.stack span{border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600;font-size:15px;background:var(--card)}
-.intern{background:var(--y);color:var(--yi)}
-.intern .lede{color:#2c3540}
+
+/* industries */
+.inds{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.ind{border:1px solid var(--line);border-radius:18px;padding:20px 16px;text-align:center;font-weight:700;color:var(--vd);display:flex;flex-direction:column;align-items:center;gap:10px;background:#fff}
+.ind svg{width:34px;height:34px;color:var(--v)}
+
+/* internships */
+.intern{background:var(--vd);color:#fff;position:relative;overflow:hidden}
+.intern .tag{color:#d9c9ff}
+.intern .lede{color:#cfc3f2}
 .tracks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.track{background:#fff;border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:10px;color:#101418}
-.track p,.track li{color:#3c4a5a;font-size:15px}
+.track{background:#fff;border-radius:22px;padding:28px;display:flex;flex-direction:column;gap:10px;color:var(--ink)}
+.track .ic{width:54px;height:54px;border-radius:15px;background:#fff3cf;display:grid;place-items:center;color:var(--vd)}
+.track .ic svg{width:32px;height:32px}
+.track p,.track li{color:var(--mute);font-size:15px}
 .track ul{margin:0;padding-left:18px}
-.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:8px}
-.meta span{font-size:13px;font-weight:700;background:#101418;color:#fff;border-radius:99px;padding:4px 10px;white-space:nowrap}
-.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:32px}
-.facts b{display:block;font-size:17px}
-.facts p{font-size:15px;color:#2c3540}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto;padding-top:10px}
+.meta span{font-size:13px;font-weight:700;background:var(--vl);color:#43209e;border-radius:99px;padding:4px 11px;white-space:nowrap}
+.meta span:first-child{background:var(--y);color:var(--vd)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:36px;padding-top:30px;border-top:1px solid rgba(255,255,255,.15)}
+.facts b{display:block;font-size:17px;color:var(--y)}
+.facts p{font-size:15px;color:#cfc3f2}
+
+/* cta */
+.cta{background:linear-gradient(120deg,var(--v),var(--v2));border-radius:28px;color:#fff;padding:clamp(36px,5vw,64px);display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:center;position:relative;overflow:hidden}
+.cta p{color:#e7dcff;margin-top:12px;max-width:52ch}
+.cta .acts{justify-content:flex-end;margin-top:0;position:relative;z-index:1}
+.cta .shape{position:absolute;right:-60px;bottom:-80px;width:280px;height:280px;border-radius:50%;border:40px solid rgba(255,201,60,.35)}
+.cta .shape2{position:absolute;right:160px;top:-50px;width:120px;height:120px;border-radius:30px;background:rgba(255,255,255,.08);transform:rotate(20deg)}
+
+/* contact */
 .contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:40px 64px}
-.info{display:grid;gap:20px;align-content:start;margin-top:28px}
+.info{display:grid;gap:14px;align-content:start;margin-top:28px}
+.info div{display:flex;gap:14px;align-items:flex-start;padding:16px;border:1px solid var(--line);border-radius:16px}
+.info i{flex:none;width:42px;height:42px;border-radius:12px;background:var(--vl);color:var(--v);display:grid;place-items:center;font-style:normal}
+.info i svg{width:22px;height:22px}
 .info b{display:block;font-size:14px;color:var(--mute);font-weight:600}
-.info span{font-size:18px;font-weight:700}
-form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+.info span{font-size:17px;font-weight:700;overflow-wrap:anywhere}
+form{background:#fff;border:1px solid var(--line);border-radius:24px;padding:30px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;box-shadow:0 20px 50px rgba(60,20,150,.08);position:relative}
 form .full{grid-column:1/-1}
 label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
-input,select,textarea{width:100%;font:16px Manrope,sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;min-height:48px}
-textarea{min-height:120px;resize:vertical}
-.err{color:#c4281c;font-size:14px;min-height:0}
-.ok{display:none;grid-column:1/-1;background:var(--soft);border-left:4px solid var(--y);padding:14px 16px;border-radius:8px}
-.note{font-size:13px;color:var(--mute)}
-footer{background:var(--ink);color:var(--bg)}
-footer .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px}
-footer h4{margin:0 0 10px;font-size:15px}
-footer a{display:block;text-decoration:none;opacity:.8;padding:4px 0;font-size:15px}
-footer a:hover{opacity:1}
-footer .bot{grid-column:1/-1;border-top:1px solid color-mix(in srgb,var(--bg) 20%,transparent);padding-top:20px;font-size:14px;opacity:.7;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-@media(max-width:980px){.grid,.tracks{grid-template-columns:repeat(2,minmax(0,1fr))}.models,.facts{grid-template-columns:repeat(2,minmax(0,1fr))}.models div:nth-child(3){padding-left:0}.models div:nth-child(2){border-right:0}.steps{grid-template-columns:minmax(0,1fr)}.steps li{padding:0 0 0 60px;min-height:48px}.steps li::after{display:none}footer .wrap{grid-template-columns:repeat(3,minmax(0,1fr))}footer .wrap>div:first-child{grid-column:1/-1}}
-@media(max-width:760px){.hero .top,.head,.contact{grid-template-columns:minmax(0,1fr)}.links{display:none}}
-@media(max-width:600px){.grid,.tracks,.models,.facts,form{grid-template-columns:minmax(0,1fr)}.models div{padding-left:0;border-right:0;border-bottom:1px solid var(--line)}.stage{border-radius:14px 14px 0 0}footer .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+input,select,textarea{width:100%;font:16px "Plus Jakarta Sans",sans-serif;color:var(--ink);background:#fbfaff;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;min-height:50px}
+input:focus,select:focus,textarea:focus{border-color:var(--v)}
+textarea{min-height:130px;resize:vertical}
+.err{color:#c4281c;font-size:14px}
+.ok{display:none;grid-column:1/-1;background:var(--vl);border-left:4px solid var(--y);padding:14px 16px;border-radius:10px}
+.small{font-size:13px;color:var(--mute)}
+
+/* footer */
+footer{background:var(--vd);color:#fff;padding-top:clamp(56px,6vw,80px)}
+footer .cols{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(0,1fr));gap:36px}
+footer .logo{color:#fff}
+footer .logo i::after{border-color:var(--vd)}
+footer h4{margin:0 0 12px;font-size:15px;color:var(--y)}
+footer a{display:block;text-decoration:none;color:#cfc3f2;padding:4px 0;font-size:15px}
+footer a:hover{color:#fff}
+footer .desc{color:#cfc3f2;margin-top:14px;max-width:38ch;font-size:15px}
+footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-block:22px;font-size:14px;color:#a99bd6;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media(max-width:1060px){.links{display:none}.links.open{display:flex;flex-direction:column;align-items:stretch;position:absolute;top:72px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:10px max(5vw,16px) 16px}.menu{display:grid;place-items:center}.navcta{display:none}.vgrid,.models{grid-template-columns:repeat(2,minmax(0,1fr))}.inds{grid-template-columns:repeat(3,minmax(0,1fr))}.steps{grid-template-columns:minmax(0,1fr)}.steps li{padding:0 0 0 66px;min-height:52px}.steps li::after{display:none}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}footer .cols{grid-template-columns:repeat(3,minmax(0,1fr))}footer .cols>div:first-child{grid-column:1/-1}}
+@media(max-width:860px){.hero .wrap,.about .top,.head,.pillars .wrap,.contact,.cta,.split{grid-template-columns:minmax(0,1fr)}.grid,.tracks{grid-template-columns:repeat(2,minmax(0,1fr))}.cta .acts{justify-content:flex-start}.trio{grid-template-columns:minmax(0,1fr)}.trio div,.trio div+div{padding:22px 0;border-left:0;border-bottom:1px solid var(--line)}}
+@media(max-width:600px){.vgrid,.grid,.tracks,.models,.facts,.pgrid,form{grid-template-columns:minmax(0,1fr)}.inds{grid-template-columns:repeat(2,minmax(0,1fr))}footer .cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.feat{min-height:0}.feat .art{min-height:180px}}
 </style>
 </head>
 <body>
 <nav>
   <div class="wrap">
     <a class="logo" href="#top"><i>S</i>Shreedash</a>
-    <div class="links">
+    <div class="links" id="links">
+      <a href="#top">Home</a>
+      <a href="#about">About us</a>
       <a href="#services">Services</a>
       <a href="#staffing">Staffing</a>
-      <a href="#process">How we work</a>
+      <a href="#industries">Industries</a>
       <a href="#internships">Internships</a>
       <a href="#contact">Contact</a>
     </div>
-    <a class="btn" href="#contact">Talk to us</a>
+    <a class="btn navcta" href="#contact">Talk to us</a>
+    <button class="menu" id="menu" aria-label="Open menu" aria-expanded="false" aria-controls="links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </nav>
 
-<header class="band hero" id="top">
+<header class="hero" id="top">
   <div class="wrap">
-    <div class="top">
-      <div>
-        <h1>Software, data and AI teams that ship for your business</h1>
+    <div>
+      <p class="tag">IT consulting, software and staffing</p>
+      <h1>Technology that moves your business <span>forward</span></h1>
+      <p class="lede">Shreedash builds web, desktop and mobile applications, data platforms, AI solutions and online stores with secure payments. Need people instead? We place skilled engineers on your team.</p>
+      <div class="acts">
+        <a class="btn yel arrow" href="#services">Explore services</a>
+        <a class="btn line" href="#contact">Talk to our team</a>
       </div>
-      <div>
-        <p class="lede">Shreedash builds web, desktop and mobile applications, data platforms, AI features and online stores with secure payments. Need people instead? We place vetted engineers on your team.</p>
-        <div class="acts">
-          <a class="btn" href="#contact">Start a project</a>
-          <a class="btn alt" href="#staffing">Hire engineers</a>
-        </div>
-      </div>
+      <div class="note"><span>Free first consultation</span><span>Fixed price or hourly</span><span>Reply in one business day</span></div>
     </div>
-    <div class="stage" role="img" aria-label="Diagram: data from databases, files and APIs flows through a data pipeline into an AI engine, then out to web, desktop and mobile apps and a payment terminal">
-      <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid meet">
+    <div class="scene" role="img" aria-label="Illustration: data from databases and APIs flows through a data pipeline into an AI engine, then out to web, desktop and mobile apps and a payment terminal">
+      <svg viewBox="0 0 640 500">
         <defs>
-          <linearGradient id="scr" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a3441"/><stop offset="1" stop-color="#101418"/></linearGradient>
-          <linearGradient id="cyl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3c4a5a"/><stop offset=".5" stop-color="#5b6b7d"/><stop offset="1" stop-color="#2a3441"/></linearGradient>
-          <g id="db"><rect x="-38" y="-30" width="76" height="60" fill="url(#cyl)"/><ellipse cx="0" cy="30" rx="38" ry="11" fill="#2a3441"/><ellipse cx="0" cy="-30" rx="38" ry="11" fill="#8fa1b4"/><path d="M-38 -6 q38 20 76 0" stroke="#8fa1b4" stroke-width="2" fill="none"/><path d="M-38 12 q38 20 76 0" stroke="#8fa1b4" stroke-width="2" fill="none"/></g>
+          <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".16"/><stop offset="1" stop-color="#ffffff" stop-opacity=".05"/></linearGradient>
+          <linearGradient id="cyl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7c4dff"/><stop offset=".5" stop-color="#a98bff"/><stop offset="1" stop-color="#6a3cf0"/></linearGradient>
+          <g id="db"><rect x="-32" y="-26" width="64" height="52" fill="url(#cyl)"/><ellipse cx="0" cy="26" rx="32" ry="9" fill="#5b21d6"/><ellipse cx="0" cy="-26" rx="32" ry="9" fill="#d6c8ff"/><path d="M-32 -4 q32 16 64 0M-32 12 q32 16 64 0" stroke="#d6c8ff" stroke-width="2" fill="none"/></g>
         </defs>
-        <!-- ground shadow plane -->
-        <rect x="0" y="370" width="1200" height="50" fill="#f0c52e"/>
-        <!-- pipes -->
-        <g fill="none" stroke="#101418" stroke-width="6" stroke-linecap="round" opacity=".85">
-          <path id="p1" d="M150 120 C260 120 260 210 340 210"/>
-          <path id="p2" d="M150 300 C260 300 260 210 340 210"/>
-          <path id="p3" d="M520 210 L640 210"/>
-          <path id="p4" d="M800 210 C880 210 880 95 960 95"/>
-          <path id="p5" d="M800 210 C880 210 880 210 960 230"/>
-          <path id="p6" d="M800 210 C880 210 880 330 960 330"/>
+        <rect x="10" y="20" width="620" height="460" rx="28" fill="url(#panel)" stroke="#ffffff" stroke-opacity=".18"/>
+        <g fill="none" stroke="#ffffff" stroke-opacity=".45" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 10">
+          <path d="M120 140 C170 140 170 250 215 250"/>
+          <path d="M120 360 C170 360 170 250 215 250"/>
+          <path d="M335 250 L380 250"/>
+          <path d="M470 250 C500 250 500 120 520 120"/>
+          <path d="M470 250 L520 255"/>
+          <path d="M470 250 C500 250 500 385 520 385"/>
         </g>
-        <!-- sources -->
-        <g transform="translate(100,110)"><ellipse cx="0" cy="55" rx="50" ry="8" fill="#101418" opacity=".15"/><use href="#db"/></g>
-        <g transform="translate(100,290)"><ellipse cx="0" cy="55" rx="50" ry="8" fill="#101418" opacity=".15"/><use href="#db"/></g>
-        <text x="100" y="190" text-anchor="middle">Databases</text>
-        <text x="100" y="370" text-anchor="middle" dy="-2">Files and APIs</text>
-        <!-- pipeline block -->
-        <g transform="translate(340,150)">
-          <rect x="6" y="10" width="180" height="120" rx="14" fill="#101418" opacity=".18"/>
-          <rect width="180" height="120" rx="14" fill="#ffffff"/>
-          <rect width="180" height="120" rx="14" fill="none" stroke="#101418" stroke-width="3"/>
-          <g fill="#3c4a5a"><rect x="22" y="30" width="40" height="14" rx="4"/><rect x="70" y="30" width="88" height="14" rx="4" opacity=".5"/><rect x="22" y="54" width="100" height="14" rx="4" opacity=".7"/><rect x="130" y="54" width="28" height="14" rx="4"/><rect x="22" y="78" width="60" height="14" rx="4" opacity=".5"/><rect x="90" y="78" width="68" height="14" rx="4"/></g>
+        <g transform="translate(80,135)"><use href="#db"/></g>
+        <g transform="translate(80,355)"><use href="#db"/></g>
+        <text x="80" y="205" text-anchor="middle">Databases</text>
+        <text x="80" y="425" text-anchor="middle">APIs and files</text>
+        <g transform="translate(215,195)">
+          <rect width="120" height="110" rx="16" fill="#ffffff"/>
+          <g fill="#5b21d6"><rect x="16" y="22" width="30" height="12" rx="4"/><rect x="52" y="22" width="52" height="12" rx="4" opacity=".35"/><rect x="16" y="44" width="70" height="12" rx="4" opacity=".6"/><rect x="92" y="44" width="12" height="12" rx="4" fill="#ffc93c"/><rect x="16" y="66" width="40" height="12" rx="4" opacity=".35"/><rect x="62" y="66" width="42" height="12" rx="4"/></g>
         </g>
-        <text x="430" y="300" text-anchor="middle">Data engineering</text>
-        <!-- AI core -->
-        <g transform="translate(720,210)">
-          <circle r="92" fill="#101418" opacity=".14" cx="8" cy="12"/>
-          <circle r="84" fill="#101418"/>
-          <circle r="84" fill="none" stroke="#ffffff" stroke-width="2" opacity=".25"/>
-          <g stroke="#ffd84a" stroke-width="3" fill="#ffd84a">
-            <line x1="-40" y1="-30" x2="0" y2="-40"/><line x1="-40" y1="-30" x2="0" y2="0"/><line x1="-40" y1="30" x2="0" y2="0"/><line x1="-40" y1="30" x2="0" y2="40"/><line x1="0" y1="-40" x2="40" y2="0"/><line x1="0" y1="0" x2="40" y2="0"/><line x1="0" y1="40" x2="40" y2="0"/><line x1="-40" y1="-30" x2="0" y2="40" opacity=".4"/><line x1="-40" y1="30" x2="0" y2="-40" opacity=".4"/>
-            <circle cx="-40" cy="-30" r="8"/><circle cx="-40" cy="30" r="8"/><circle cx="0" cy="-40" r="8"/><circle cx="0" cy="0" r="8"/><circle cx="0" cy="40" r="8"/><circle cx="40" cy="0" r="10" fill="#ffffff" stroke="#ffffff"/>
+        <text x="275" y="330" text-anchor="middle">Data engineering</text>
+        <g transform="translate(425,250)">
+          <circle r="62" fill="#ffc93c" opacity=".18"/>
+          <circle r="48" fill="#1d0b4a"/>
+          <g stroke="#ffc93c" stroke-width="2.5" fill="#ffc93c">
+            <path d="M-22 -16 L0 -22 M-22 -16 L0 0 M-22 16 L0 0 M-22 16 L0 22 M0 -22 L22 0 M0 0 L22 0 M0 22 L22 0" fill="none"/>
+            <circle cx="-22" cy="-16" r="5"/><circle cx="-22" cy="16" r="5"/><circle cx="0" cy="-22" r="5"/><circle cx="0" cy="0" r="5"/><circle cx="0" cy="22" r="5"/><circle cx="22" cy="0" r="6" fill="#fff" stroke="#fff"/>
           </g>
         </g>
-        <text x="720" y="335" text-anchor="middle">AI applications</text>
-        <!-- web browser window -->
-        <g transform="translate(960,40)">
-          <rect x="6" y="8" width="170" height="104" rx="10" fill="#101418" opacity=".18"/>
-          <rect width="170" height="104" rx="10" fill="#ffffff" stroke="#101418" stroke-width="3"/>
-          <path d="M0 10 a10 10 0 0 1 10 -10 h150 a10 10 0 0 1 10 10 v12 h-170z" fill="#101418"/>
-          <circle cx="14" cy="11" r="3.5" fill="#ff7a6b"/><circle cx="26" cy="11" r="3.5" fill="#ffd84a"/><circle cx="38" cy="11" r="3.5" fill="#6fd08c"/>
-          <rect x="14" y="34" width="70" height="56" rx="6" fill="#ffd84a"/><rect x="94" y="34" width="62" height="10" rx="3" fill="#3c4a5a"/><rect x="94" y="52" width="48" height="8" rx="3" fill="#8fa1b4"/><rect x="94" y="68" width="40" height="18" rx="5" fill="#101418"/>
+        <text x="425" y="335" text-anchor="middle">AI engine</text>
+        <g transform="translate(520,70)">
+          <rect width="96" height="74" rx="9" fill="#ffffff"/>
+          <path d="M0 9a9 9 0 0 1 9-9h78a9 9 0 0 1 9 9v8H0z" fill="#d6c8ff"/>
+          <circle cx="11" cy="9" r="3" fill="#5b21d6"/><circle cx="21" cy="9" r="3" fill="#ffc93c"/>
+          <rect x="10" y="26" width="38" height="38" rx="5" fill="#ffc93c"/><rect x="54" y="28" width="32" height="8" rx="3" fill="#5b21d6"/><rect x="54" y="42" width="24" height="6" rx="3" fill="#b9a5f5"/><rect x="54" y="52" width="26" height="12" rx="5" fill="#1d0b4a"/>
         </g>
-        <!-- desktop monitor -->
-        <g transform="translate(960,180)">
-          <rect x="6" y="8" width="110" height="74" rx="8" fill="#101418" opacity=".18"/>
-          <rect width="110" height="74" rx="8" fill="url(#scr)" stroke="#101418" stroke-width="3"/>
-          <rect x="10" y="10" width="28" height="54" rx="3" fill="#3c4a5a"/><rect x="44" y="10" width="56" height="24" rx="3" fill="#ffd84a"/><rect x="44" y="40" width="56" height="24" rx="3" fill="#5b6b7d"/>
-          <path d="M45 74 h20 l6 18 h-32z" fill="#3c4a5a"/><rect x="30" y="92" width="50" height="6" rx="3" fill="#101418"/>
+        <text x="568" y="164" text-anchor="middle">Web</text>
+        <g transform="translate(520,215)">
+          <rect width="70" height="50" rx="6" fill="#ffffff"/>
+          <rect x="7" y="7" width="18" height="36" rx="3" fill="#d6c8ff"/><rect x="30" y="7" width="33" height="16" rx="3" fill="#5b21d6"/><rect x="30" y="27" width="33" height="16" rx="3" fill="#ffc93c"/>
+          <path d="M28 50h14l4 10H24z" fill="#d6c8ff"/>
         </g>
-        <!-- phone -->
-        <g transform="translate(1085,170)">
-          <rect x="5" y="8" width="62" height="118" rx="14" fill="#101418" opacity=".18"/>
-          <rect width="62" height="118" rx="14" fill="#101418"/>
-          <rect x="6" y="14" width="50" height="88" rx="6" fill="#ffffff"/>
-          <rect x="12" y="22" width="38" height="26" rx="4" fill="#ffd84a"/><rect x="12" y="54" width="38" height="6" rx="3" fill="#3c4a5a"/><rect x="12" y="66" width="26" height="6" rx="3" fill="#8fa1b4"/><rect x="12" y="82" width="38" height="12" rx="4" fill="#101418"/>
-          <rect x="22" y="6" width="18" height="4" rx="2" fill="#3c4a5a"/>
+        <text x="555" y="290" text-anchor="middle">Desktop</text>
+        <g transform="translate(596,205)">
+          <rect width="32" height="60" rx="8" fill="#1d0b4a" stroke="#ffffff" stroke-width="2"/>
+          <rect x="4" y="8" width="24" height="42" rx="3" fill="#ffffff"/><rect x="7" y="12" width="18" height="12" rx="2" fill="#ffc93c"/><rect x="7" y="28" width="18" height="4" rx="2" fill="#5b21d6"/><rect x="7" y="36" width="12" height="4" rx="2" fill="#b9a5f5"/>
         </g>
-        <!-- payment terminal -->
-        <g transform="translate(960,300)">
-          <rect x="6" y="8" width="96" height="66" rx="10" fill="#101418" opacity=".18"/>
-          <rect width="96" height="66" rx="10" fill="#3c4a5a" stroke="#101418" stroke-width="3"/>
-          <rect x="10" y="10" width="44" height="22" rx="3" fill="#cfe9d6"/>
-          <g fill="#8fa1b4"><rect x="10" y="40" width="10" height="8" rx="2"/><rect x="24" y="40" width="10" height="8" rx="2"/><rect x="38" y="40" width="10" height="8" rx="2"/><rect x="10" y="52" width="10" height="8" rx="2"/><rect x="24" y="52" width="10" height="8" rx="2"/><rect x="38" y="52" width="10" height="8" rx="2"/></g>
-          <rect x="62" y="-14" width="58" height="38" rx="5" fill="#ffffff" stroke="#101418" stroke-width="2.5" transform="rotate(-10 90 5)"/>
-          <rect x="68" y="-6" width="12" height="9" rx="2" fill="#ffd84a" transform="rotate(-10 90 5)"/>
+        <g transform="translate(520,350)">
+          <rect width="74" height="56" rx="10" fill="#ffffff"/>
+          <rect x="8" y="8" width="34" height="16" rx="3" fill="#d6f5df"/>
+          <g fill="#b9a5f5"><rect x="8" y="30" width="8" height="6" rx="2"/><rect x="20" y="30" width="8" height="6" rx="2"/><rect x="32" y="30" width="8" height="6" rx="2"/><rect x="8" y="40" width="8" height="6" rx="2"/><rect x="20" y="40" width="8" height="6" rx="2"/><rect x="32" y="40" width="8" height="6" rx="2"/></g>
+          <g transform="rotate(-12 70 10)"><rect x="46" y="-12" width="44" height="28" rx="4" fill="#ffc93c"/><rect x="51" y="-6" width="9" height="7" rx="1.5" fill="#1d0b4a"/></g>
         </g>
-        <text x="1045" y="30" text-anchor="middle">Web</text>
-        <text x="1015" y="300" text-anchor="end" dx="-62">Desktop</text>
-        <text x="1116" y="310" text-anchor="middle">Mobile</text>
-        <text x="1080" y="395" text-anchor="middle">e-Commerce and payments</text>
-        <!-- moving data tokens -->
-        <g fill="#ffffff" stroke="#101418" stroke-width="2.5">
-          <circle class="flow" r="7" style="offset-path:path('M150 120 C260 120 260 210 340 210')"/>
-          <circle class="flow" r="7" style="offset-path:path('M150 300 C260 300 260 210 340 210');animation-delay:-2.5s"/>
-          <circle class="flow" r="7" style="offset-path:path('M520 210 L640 210');animation-duration:2.5s"/>
-          <circle class="flow" r="7" style="offset-path:path('M800 210 C880 210 880 95 960 95');animation-duration:3s"/>
-          <circle class="flow" r="7" style="offset-path:path('M800 210 C880 210 880 210 960 230');animation-duration:3s;animation-delay:-1s"/>
-          <circle class="flow" r="7" style="offset-path:path('M800 210 C880 210 880 330 960 330');animation-duration:3s;animation-delay:-2s"/>
+        <text x="557" y="432" text-anchor="middle">Payments</text>
+        <g fill="#ffc93c" stroke="#1d0b4a" stroke-width="2">
+          <circle class="flow" r="6" style="offset-path:path('M120 140 C170 140 170 250 215 250')"/>
+          <circle class="flow" r="6" style="offset-path:path('M120 360 C170 360 170 250 215 250');animation-delay:-2.5s"/>
+          <circle class="flow" r="6" style="offset-path:path('M335 250 L380 250');animation-duration:2s"/>
+          <circle class="flow" r="6" style="offset-path:path('M470 250 C500 250 500 120 520 120');animation-duration:3s"/>
+          <circle class="flow" r="6" style="offset-path:path('M470 250 L520 255');animation-duration:3s;animation-delay:-1s"/>
+          <circle class="flow" r="6" style="offset-path:path('M470 250 C500 250 500 385 520 385');animation-duration:3s;animation-delay:-2s"/>
         </g>
       </svg>
     </div>
   </div>
 </header>
 
-<div class="strip"><div class="wrap"><span>IT staffing</span><span>Web, desktop and mobile</span><span>Data engineering</span><span>AI applications</span><span>e-Commerce</span><span>Payment gateways</span></div></div>
+<section class="values">
+  <div class="wrap">
+    <div class="vgrid" id="values"></div>
+  </div>
+</section>
 
-<section class="band" id="services">
+<section class="band about" id="about">
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <p class="tag">About Shreedash</p>
+        <h2>One partner for software, data and the people to run it</h2>
+      </div>
+      <p class="lede">We help growing businesses plan, build and run the technology they depend on. The same team that designs your data platform can build the app that runs on it and the checkout that earns from it, and we can staff your own team when you need extra hands.</p>
+    </div>
+    <div class="trio">
+      <div><b>Who we are</b><p>A consulting and engineering firm working across web, desktop, mobile, data and AI, with an IT staffing practice and an internship programme.</p></div>
+      <div><b>Our vision</b><p>Make modern technology practical and affordable for every business, whatever its size.</p></div>
+      <div><b>Our mission</b><p>Deliver working software in short cycles, explain every decision in plain language, and leave our clients stronger than we found them.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band soft" id="services">
   <div class="wrap">
     <div class="head">
-      <h2>One partner from first sketch to production</h2>
-      <p class="lede">Pick a single service or combine them. The same team that designs your data platform can build the app that runs on it and the checkout that earns from it.</p>
+      <div>
+        <p class="tag">Our services</p>
+        <h2>Everything you need to build, launch and grow</h2>
+      </div>
+      <div>
+        <p class="lede">Pick a single service or combine them. Every engagement starts with a free call to understand your goals.</p>
+        <div class="acts"><a class="btn arrow" href="#contact">Get a free estimate</a></div>
+      </div>
     </div>
     <div class="grid" id="svcGrid"></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <article class="feat a">
+      <div class="art"><svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g fill="#ffffff" fill-opacity=".1"><circle cx="330" cy="40" r="90"/></g>
+        <g transform="translate(40,150)">
+          <rect x="0" y="-30" width="34" height="30" rx="6" fill="#d6c8ff"/><rect x="46" y="-60" width="34" height="60" rx="6" fill="#b9a5f5"/><rect x="92" y="-48" width="34" height="48" rx="6" fill="#d6c8ff"/><rect x="138" y="-92" width="34" height="92" rx="6" fill="#ffc93c"/><rect x="184" y="-74" width="34" height="74" rx="6" fill="#b9a5f5"/><rect x="230" y="-110" width="34" height="110" rx="6" fill="#ffffff"/>
+          <path d="M17 -44 L63 -74 L109 -62 L155 -106 L201 -88 L247 -124" stroke="#ffc93c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="247" cy="-124" r="7" fill="#ffc93c"/>
+        </g>
+        <g transform="translate(300,120)"><circle r="34" fill="#1d0b4a"/><path d="M-12 -8 L0 -14 L12 -8 M-12 -8 L0 2 L12 -8 M-12 8 L0 2 L12 8 M0 14 L0 2" stroke="#ffc93c" stroke-width="2.5" fill="none"/><circle cx="0" cy="2" r="4" fill="#fff"/></g>
+      </svg></div>
+      <div class="txt">
+        <h3 style="font-size:26px">Data engineering and AI</h3>
+        <p>Pipelines, warehouses and dashboards that give you one trusted view of the business, plus AI assistants, search and forecasting built on that data.</p>
+        <ul><li>Spark</li><li>Airflow</li><li>Snowflake</li><li>Power BI</li><li>LLMs and RAG</li></ul>
+        <a class="btn yel arrow" href="#contact">Discuss your data</a>
+      </div>
+    </article>
+    <article class="feat b">
+      <div class="art"><svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g fill="#ffffff" fill-opacity=".08"><circle cx="70" cy="40" r="90"/></g>
+        <g transform="translate(70,40)">
+          <rect width="170" height="140" rx="14" fill="#ffffff"/>
+          <rect x="14" y="16" width="64" height="60" rx="8" fill="#d6c8ff"/><rect x="88" y="16" width="68" height="10" rx="4" fill="#1d0b4a"/><rect x="88" y="34" width="44" height="8" rx="4" fill="#b9a5f5"/><rect x="88" y="54" width="56" height="22" rx="11" fill="#5b21d6"/>
+          <rect x="14" y="90" width="142" height="10" rx="4" fill="#efe9ff"/><rect x="14" y="108" width="98" height="10" rx="4" fill="#efe9ff"/>
+        </g>
+        <g transform="translate(215,95) rotate(-8)">
+          <rect width="130" height="82" rx="12" fill="#ffc93c"/><rect x="14" y="18" width="24" height="18" rx="4" fill="#1d0b4a"/><rect x="14" y="52" width="70" height="8" rx="4" fill="#1d0b4a" opacity=".6"/><circle cx="100" cy="62" r="10" fill="#5b21d6" opacity=".7"/><circle cx="112" cy="62" r="10" fill="#ffffff" opacity=".7"/>
+        </g>
+      </svg></div>
+      <div class="txt">
+        <h3 style="font-size:26px">e-Commerce and payment gateways</h3>
+        <p>Online stores and marketplaces with catalogue, orders, shipping and accounts, connected to secure checkout, subscriptions, refunds and reconciliation.</p>
+        <ul><li>Shopify</li><li>WooCommerce</li><li>Stripe</li><li>Razorpay</li><li>PayPal</li><li>UPI</li></ul>
+        <a class="btn yel arrow" href="#contact">Plan your store</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="band pillars">
+  <div class="wrap">
+    <div class="team" aria-hidden="true">
+      <svg viewBox="0 0 560 420">
+        <rect width="560" height="420" fill="#f3eeff"/>
+        <circle cx="440" cy="90" r="120" fill="#e6dcff"/>
+        <rect x="70" y="250" width="420" height="16" rx="8" fill="#1d0b4a"/>
+        <rect x="100" y="266" width="12" height="110" fill="#1d0b4a"/><rect x="448" y="266" width="12" height="110" fill="#1d0b4a"/>
+        <!-- big screen -->
+        <g transform="translate(170,60)">
+          <rect width="220" height="140" rx="14" fill="#ffffff" stroke="#d6c8ff" stroke-width="3"/>
+          <rect x="18" y="20" width="80" height="12" rx="5" fill="#5b21d6"/>
+          <g transform="translate(18,110)"><rect y="-24" width="20" height="24" rx="4" fill="#d6c8ff"/><rect x="28" y="-46" width="20" height="46" rx="4" fill="#b9a5f5"/><rect x="56" y="-36" width="20" height="36" rx="4" fill="#d6c8ff"/><rect x="84" y="-62" width="20" height="62" rx="4" fill="#ffc93c"/></g>
+          <circle cx="170" cy="78" r="30" fill="none" stroke="#efe9ff" stroke-width="14"/>
+          <path d="M170 48 a30 30 0 0 1 28 40" fill="none" stroke="#5b21d6" stroke-width="14"/>
+        </g>
+        <rect x="272" y="200" width="16" height="50" fill="#d6c8ff"/>
+        <!-- person left -->
+        <g transform="translate(140,150)">
+          <rect x="-34" y="40" width="68" height="70" rx="26" fill="#5b21d6"/>
+          <circle cy="16" r="24" fill="#f2c7a5"/>
+          <path d="M-24 10 q0 -30 24 -30 q26 0 26 26 q-14 -8 -30 -6 q-12 2 -20 10z" fill="#1d0b4a"/>
+          <rect x="-46" y="84" width="60" height="16" rx="8" fill="#5b21d6" transform="rotate(-10)"/>
+        </g>
+        <!-- laptop left -->
+        <g transform="translate(150,214)"><path d="M0 36 L10 0 H70 L80 36z" fill="#b9a5f5"/><rect x="-6" y="34" width="92" height="6" rx="3" fill="#1d0b4a"/><circle cx="40" cy="16" r="5" fill="#fff"/></g>
+        <!-- person right -->
+        <g transform="translate(420,150)">
+          <rect x="-34" y="40" width="68" height="70" rx="26" fill="#ffc93c"/>
+          <circle cy="16" r="24" fill="#c98f6b"/>
+          <path d="M-26 18 q-4 -40 26 -40 q30 0 26 40 q-6 -24 -26 -24 q-20 0 -26 24z" fill="#1d0b4a"/>
+          <rect x="-14" y="84" width="60" height="16" rx="8" fill="#ffc93c" transform="rotate(10)"/>
+        </g>
+        <g transform="translate(330,214)"><path d="M0 36 L10 0 H70 L80 36z" fill="#d6c8ff"/><rect x="-6" y="34" width="92" height="6" rx="3" fill="#1d0b4a"/><circle cx="40" cy="16" r="5" fill="#5b21d6"/></g>
+        <!-- mug and plant -->
+        <rect x="262" y="226" width="22" height="24" rx="5" fill="#ffffff" stroke="#1d0b4a" stroke-width="3"/>
+        <g transform="translate(470,250)"><rect x="-14" y="-30" width="28" height="30" rx="5" fill="#5b21d6"/><path d="M0 -30 q-26 -30 -6 -56 q8 26 6 56 q4 -30 22 -44 q4 28 -22 44" fill="#7c4dff"/></g>
+      </svg>
+    </div>
+    <div>
+      <p class="tag">Why teams choose us</p>
+      <h2>Built to last, run with care</h2>
+      <p class="lede" style="margin-top:16px">We work in two-week sprints with a demo at the end of each one, so you always know where your project stands and can change direction early.</p>
+      <div class="pgrid">
+        <div class="pill"><b>Build</b><p>Clean, tested code on proven frameworks you can maintain.</p></div>
+        <div class="pill"><b>Scale</b><p>Cloud-ready architecture that grows with your users and data.</p></div>
+        <div class="pill"><b>Secure</b><p>Security reviews, safe payments and protected customer data.</p></div>
+        <div class="pill"><b>Support</b><p>Monitoring, fixes and new features after launch.</p></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="band soft" id="staffing">
   <div class="wrap">
     <div class="head">
-      <h2>IT staffing that fits how you hire</h2>
-      <p class="lede">We screen every candidate on real technical work before you meet them, so your interviews go to people who can already do the job.</p>
+      <div>
+        <p class="tag">IT staffing</p>
+        <h2>Skilled engineers, hired the way you prefer</h2>
+      </div>
+      <p class="lede">We test every candidate on real technical work before you meet them, so your interviews go to people who can already do the job.</p>
     </div>
     <div class="models">
-      <div><b>Contract</b><p>Skilled engineers for a fixed term or a project spike. Start in days, scale up or down as work changes.</p></div>
-      <div><b>Contract to hire</b><p>Work together first, then convert the engineer to your payroll when you are both sure of the fit.</p></div>
-      <div><b>Direct hire</b><p>We search, screen and shortlist for permanent roles. You make the final call and the offer.</p></div>
-      <div><b>Dedicated team</b><p>A managed squad of developers, data engineers and QA working only on your product, with a lead who reports to you.</p></div>
+      <div class="model"><b>Contract</b><p>Engineers for a fixed term or a busy period. Start in days and scale up or down as work changes.</p></div>
+      <div class="model"><b>Contract to hire</b><p>Work together first, then move the engineer to your payroll once you are both sure of the fit.</p></div>
+      <div class="model"><b>Direct hire</b><p>We search, screen and shortlist for permanent roles. You make the final decision and the offer.</p></div>
+      <div class="model"><b>Dedicated team</b><p>A managed group of developers, data engineers and testers working only on your product.</p></div>
     </div>
-    <h3 style="margin-top:48px">Roles we place</h3>
-    <div class="stack" id="roles"></div>
+    <h3 class="sub">Roles we place</h3>
+    <div class="chips" id="roles"></div>
   </div>
 </section>
 
 <section class="band" id="process">
   <div class="wrap">
     <div class="head">
-      <h2>How a project runs</h2>
-      <p class="lede">Short cycles, working software every two weeks, and a single point of contact who knows your project inside out.</p>
+      <div>
+        <p class="tag">How we work</p>
+        <h2>From first call to launch and beyond</h2>
+      </div>
+      <p class="lede">One point of contact, working software every two weeks, and clear estimates you approve before work begins.</p>
     </div>
     <ol class="steps">
       <li><b>Discover</b><p>A free call to understand your goals, users, budget and timeline.</p></li>
-      <li><b>Plan</b><p>Scope, architecture and a fixed or time-and-materials estimate you can approve.</p></li>
-      <li><b>Build</b><p>Two-week sprints with demos, so you see progress and steer early.</p></li>
-      <li><b>Launch</b><p>Testing, security checks, deployment to your cloud and team handover.</p></li>
+      <li><b>Plan</b><p>Scope, architecture and a fixed-price or hourly estimate.</p></li>
+      <li><b>Build</b><p>Two-week sprints with demos so you can steer early.</p></li>
+      <li><b>Launch</b><p>Testing, security checks, deployment and handover.</p></li>
       <li><b>Support</b><p>Monitoring, fixes and new features on a plan that suits you.</p></li>
     </ol>
-    <h3 style="margin-top:56px">Technologies we work with</h3>
-    <div class="stack" id="tech"></div>
+    <h3 class="sub">Technologies we work with</h3>
+    <div class="chips" id="tech"></div>
+  </div>
+</section>
+
+<section class="band soft" id="industries">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <p class="tag">Industries</p>
+        <h2>Solutions shaped for your sector</h2>
+      </div>
+      <p class="lede">Our practices apply across industries. These are some of the areas where our services fit most often.</p>
+    </div>
+    <div class="inds" id="inds"></div>
   </div>
 </section>
 
 <section class="band intern" id="internships">
   <div class="wrap">
     <div class="head">
-      <h2>Internships that end with real work in your portfolio</h2>
-      <p class="lede">Learn by building alongside our engineers. Each intern ships a project you can show to employers, with code reviews and weekly mentoring along the way.</p>
+      <div>
+        <p class="tag">Internships</p>
+        <h2>Learn by building real projects</h2>
+      </div>
+      <p class="lede">Work alongside our engineers and finish with a project you can show employers, with code reviews and weekly mentoring along the way.</p>
     </div>
     <div class="tracks" id="tracks"></div>
     <div class="facts">
       <div><b>Who can apply</b><p>Students, recent graduates and career changers with basic programming knowledge.</p></div>
       <div><b>Format</b><p>Remote or hybrid, with live sessions, code reviews and a mentor.</p></div>
       <div><b>What you get</b><p>A finished portfolio project, a completion certificate and a reference.</p></div>
-      <div><b>Next step</b><p>Choose a track in the form below and tell us about yourself.</p></div>
+      <div><b>How to apply</b><p>Choose an internship track in the contact form below.</p></div>
     </div>
   </div>
 </section>
 
-<section class="band" id="contact">
+<section class="band">
+  <div class="wrap">
+    <div class="cta">
+      <span class="shape"></span><span class="shape2"></span>
+      <div style="position:relative;z-index:1">
+        <h2>Ready to start your next project?</h2>
+        <p>Tell us what you are planning. We will reply within one business day with next steps and a rough estimate.</p>
+      </div>
+      <div class="acts">
+        <a class="btn yel arrow" href="#contact">Start a project</a>
+        <a class="btn line" href="#staffing">Hire engineers</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="contact" style="padding-top:0">
   <div class="wrap contact">
     <div>
+      <p class="tag">Contact us</p>
       <h2>Tell us what you need</h2>
       <p class="lede" style="margin-top:16px">A project, engineers for your team, or an internship place. We reply within one business day.</p>
       <div class="info">
-        <div><b>Email</b><span>hello@shreedash.example</span></div>
-        <div><b>Phone</b><span>+1 (555) 010-2040</span></div>
-        <div><b>Office</b><span>Address to be confirmed</span></div>
-        <div><b>Hours</b><span>Mon to Fri, 9:00 to 18:00</span></div>
+        <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></i><p><b>Email</b><span>hello@shreedash.example</span></p></div>
+        <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a11 11 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></i><p><b>Phone</b><span>+1 (555) 010-2040</span></p></div>
+        <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6-7-12a7 7 0 0 1 14 0c0 6-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></i><p><b>Office</b><span>Address to be confirmed</span></p></div>
       </div>
-      <p class="note" style="margin-top:20px">Contact details shown are placeholders.</p>
+      <p class="small" style="margin-top:16px">Contact details shown are placeholders.</p>
     </div>
     <form id="f" novalidate>
       <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
@@ -318,55 +556,77 @@ footer .bot{grid-column:1/-1;border-top:1px solid color-mix(in srgb,var(--bg) 20
       <div class="full"><label for="msg">How can we help?</label><textarea id="msg" name="msg" required></textarea></div>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
       <p class="err full" id="err" aria-live="polite"></p>
-      <div class="full"><button class="btn" type="submit">Send message</button></div>
+      <div class="full"><button class="btn arrow" type="submit">Send message</button></div>
       <div class="ok" id="ok" role="status"></div>
     </form>
   </div>
 </section>
 
-<footer class="band">
+<footer>
   <div class="wrap">
-    <div><a class="logo" href="#top" style="opacity:1"><i>S</i>Shreedash</a><p style="opacity:.75;margin-top:12px;max-width:36ch">IT consulting, staffing and software development for growing businesses.</p></div>
-    <div><h4>Services</h4><a href="#services">Software development</a><a href="#services">Data engineering</a><a href="#services">AI applications</a><a href="#services">e-Commerce and payments</a></div>
-    <div><h4>Company</h4><a href="#staffing">IT staffing</a><a href="#process">How we work</a><a href="#internships">Internships</a></div>
-    <div><h4>Contact</h4><a href="#contact">hello@shreedash.example</a><a href="#contact">+1 (555) 010-2040</a></div>
-    <div class="bot"><span>© <span id="yr">2026</span> Shreedash. All rights reserved.</span><span>Privacy · Terms</span></div>
+    <div class="cols">
+      <div><a class="logo" href="#top"><i>S</i>Shreedash</a><p class="desc">IT consulting, software development, data and AI solutions, and IT staffing for growing businesses.</p></div>
+      <div><h4>Services</h4><a href="#services">Web development</a><a href="#services">Desktop and mobile apps</a><a href="#services">Data engineering</a><a href="#services">AI applications</a><a href="#services">e-Commerce and payments</a></div>
+      <div><h4>Company</h4><a href="#about">About us</a><a href="#staffing">IT staffing</a><a href="#process">How we work</a><a href="#internships">Internships</a><a href="#industries">Industries</a></div>
+      <div><h4>Contact</h4><a href="#contact">hello@shreedash.example</a><a href="#contact">+1 (555) 010-2040</a><a href="#contact">Send us a message</a></div>
+    </div>
+    <div class="bot"><span>© <span id="yr">2026</span> Shreedash. All rights reserved.</span><span>Privacy policy · Terms of use</span></div>
   </div>
 </footer>
 
 <script>
 {
 const ic = {
-  web:'<rect x="4" y="8" width="36" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 15h36" stroke="currentColor" stroke-width="3"/><rect x="9" y="20" width="12" height="10" rx="2" fill="#ffd84a"/>',
-  desk:'<rect x="4" y="6" width="36" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M16 38h12M22 30v8" stroke="currentColor" stroke-width="3"/><rect x="9" y="11" width="10" height="14" rx="2" fill="#ffd84a"/>',
-  mob:'<rect x="12" y="3" width="20" height="38" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><rect x="16" y="10" width="12" height="10" rx="2" fill="#ffd84a"/><path d="M19 35h6" stroke="currentColor" stroke-width="3"/>',
-  data:'<ellipse cx="22" cy="10" rx="15" ry="5" fill="#ffd84a" stroke="currentColor" stroke-width="3"/><path d="M7 10v24c0 3 7 5 15 5s15-2 15-5V10M7 22c0 3 7 5 15 5s15-2 15-5" fill="none" stroke="currentColor" stroke-width="3"/>',
-  ai:'<g stroke="currentColor" stroke-width="2.5"><path d="M9 12l13 10M9 32l13-10M22 22h13M22 8v28" fill="none"/></g><circle cx="9" cy="12" r="4" fill="currentColor"/><circle cx="9" cy="32" r="4" fill="currentColor"/><circle cx="22" cy="22" r="5" fill="#ffd84a" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="22" r="4" fill="currentColor"/><circle cx="22" cy="8" r="3" fill="currentColor"/><circle cx="22" cy="36" r="3" fill="currentColor"/>',
-  shop:'<path d="M5 8h5l4 20h20l4-14H13" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="17" cy="36" r="3" fill="currentColor"/><circle cx="31" cy="36" r="3" fill="currentColor"/><rect x="17" y="16" width="16" height="7" rx="2" fill="#ffd84a"/>',
-  pay:'<rect x="4" y="9" width="36" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 17h36" stroke="currentColor" stroke-width="5"/><rect x="9" y="24" width="10" height="6" rx="1.5" fill="#ffd84a"/>',
-  team:'<circle cx="15" cy="14" r="6" fill="#ffd84a" stroke="currentColor" stroke-width="3"/><circle cx="30" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 38c0-7 5-12 11-12s11 5 11 12M26 38c0-6 2-10 6-10s8 4 8 10" fill="none" stroke="currentColor" stroke-width="3"/>',
-  qa:'<path d="M22 4l15 6v10c0 9-6 16-15 20C13 36 7 29 7 20V10z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 21l5 5 9-10" fill="none" stroke="#e0b000" stroke-width="3.5" stroke-linecap="round"/>'
+  web:'<rect x="4" y="8" width="36" height="28" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 15h36" stroke="currentColor" stroke-width="3"/><rect x="9" y="20" width="12" height="10" rx="2" fill="#ffc93c"/>',
+  desk:'<rect x="4" y="6" width="36" height="24" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M16 38h12M22 30v8" stroke="currentColor" stroke-width="3"/><rect x="9" y="11" width="10" height="14" rx="2" fill="#ffc93c"/>',
+  mob:'<rect x="12" y="3" width="20" height="38" rx="5" fill="none" stroke="currentColor" stroke-width="3"/><rect x="16" y="10" width="12" height="10" rx="2" fill="#ffc93c"/><path d="M19 35h6" stroke="currentColor" stroke-width="3"/>',
+  data:'<ellipse cx="22" cy="10" rx="15" ry="5" fill="#ffc93c" stroke="currentColor" stroke-width="3"/><path d="M7 10v24c0 3 7 5 15 5s15-2 15-5V10M7 22c0 3 7 5 15 5s15-2 15-5" fill="none" stroke="currentColor" stroke-width="3"/>',
+  ai:'<g stroke="currentColor" stroke-width="2.5"><path d="M9 12l13 10M9 32l13-10M22 22h13M22 8v28" fill="none"/></g><circle cx="9" cy="12" r="4" fill="currentColor"/><circle cx="9" cy="32" r="4" fill="currentColor"/><circle cx="22" cy="22" r="5" fill="#ffc93c" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="22" r="4" fill="currentColor"/><circle cx="22" cy="8" r="3" fill="currentColor"/><circle cx="22" cy="36" r="3" fill="currentColor"/>',
+  shop:'<path d="M5 8h5l4 20h20l4-14H13" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="17" cy="36" r="3" fill="currentColor"/><circle cx="31" cy="36" r="3" fill="currentColor"/><rect x="17" y="16" width="16" height="7" rx="2" fill="#ffc93c"/>',
+  pay:'<rect x="4" y="9" width="36" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 17h36" stroke="currentColor" stroke-width="5"/><rect x="9" y="24" width="10" height="6" rx="1.5" fill="#ffc93c"/>',
+  team:'<circle cx="15" cy="14" r="6" fill="#ffc93c" stroke="currentColor" stroke-width="3"/><circle cx="30" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 38c0-7 5-12 11-12s11 5 11 12M26 38c0-6 2-10 6-10s8 4 8 10" fill="none" stroke="currentColor" stroke-width="3"/>',
+  qa:'<path d="M22 4l15 6v10c0 9-6 16-15 20C13 36 7 29 7 20V10z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 21l5 5 9-10" fill="none" stroke="#e0a800" stroke-width="3.5" stroke-linecap="round"/>',
+  code:'<path d="M15 12L5 22l10 10M29 12l10 10-10 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 8l-6 28" stroke="#e0a800" stroke-width="3" stroke-linecap="round"/>',
+  retail:'<path d="M6 16h32l-3 22H9z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M15 16a7 7 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="27" r="4" fill="#ffc93c"/>',
+  health:'<rect x="6" y="6" width="32" height="32" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 14v16M14 22h16" stroke="#e0a800" stroke-width="4" stroke-linecap="round"/>',
+  bank:'<path d="M4 16L22 6l18 10z" fill="#ffc93c" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M9 18v14M17 18v14M27 18v14M35 18v14M5 36h34" stroke="currentColor" stroke-width="3"/>',
+  edu:'<path d="M3 16l19-9 19 9-19 9z" fill="#ffc93c" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M11 21v9c0 3 5 6 11 6s11-3 11-6v-9" fill="none" stroke="currentColor" stroke-width="3"/>',
+  truck:'<rect x="3" y="12" width="24" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="3"/><path d="M27 18h8l6 7v5H27z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="11" cy="33" r="4" fill="#ffc93c" stroke="currentColor" stroke-width="2.5"/><circle cx="33" cy="33" r="4" fill="#ffc93c" stroke="currentColor" stroke-width="2.5"/>',
+  factory:'<path d="M4 38V20l10 6v-6l10 6v-6l10 6V8h6v30z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="11" y="30" width="6" height="5" fill="#ffc93c"/><rect x="23" y="30" width="6" height="5" fill="#ffc93c"/>'
 };
-const svcs = [
-  ['web','Web development','Fast, accessible websites, portals and SaaS products with clean admin dashboards and APIs.',['React','Angular','Node.js','.NET','Django']],
-  ['desk','Desktop applications','Reliable Windows, macOS and cross-platform tools for operations, retail counters and field teams.',['.NET / WPF','Electron','Java','Qt']],
-  ['mob','Mobile apps','Native and cross-platform apps for iOS and Android, from MVP to store release and updates.',['Flutter','React Native','Swift','Kotlin']],
-  ['data','Data engineering','Pipelines, warehouses and lakehouses that turn scattered data into trusted reports and dashboards.',['Spark','Airflow','Snowflake','Databricks','Power BI']],
-  ['ai','AI applications','Chat assistants, document search, forecasting and automation built on your own data, with guardrails.',['LLMs','RAG','Python','MLOps']],
-  ['shop','e-Commerce applications','Online stores and marketplaces with catalogue, inventory, orders, shipping and customer accounts.',['Shopify','WooCommerce','Magento','Headless']],
-  ['pay','Payment gateway integration','Secure checkout, subscriptions, refunds and reconciliation, built with PCI DSS practices in mind.',['Stripe','PayPal','Razorpay','Authorize.Net','UPI']],
-  ['team','IT staffing','Vetted developers, data engineers and testers on contract, contract to hire or direct hire.',['Contract','C2H','Direct hire']],
-  ['qa','Testing and support','Manual and automated testing, performance checks, cloud deployment and ongoing maintenance.',['Selenium','Cypress','AWS','Azure']]
-];
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const svg = k => `<svg viewBox="0 0 44 44" aria-hidden="true">${ic[k]}</svg>`;
+
+const values = [
+  ['code','Software development','Web, desktop and mobile apps built to your needs.'],
+  ['ai','Data and AI','Pipelines, dashboards and AI that use your own data.'],
+  ['pay','e-Commerce and payments','Online stores with secure, reliable checkout.'],
+  ['team','IT staffing','Tested engineers on contract or permanent roles.']
+];
+document.getElementById('values').innerHTML = values.map(([k,t,d]) => `<div class="vcard"><span class="ic">${svg(k)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`).join('');
+
+const svcs = [
+  ['web','Web development','Fast, accessible websites, portals and SaaS products with admin dashboards and APIs.',['React','Angular','Node.js','.NET','Django']],
+  ['desk','Desktop applications','Reliable Windows, macOS and cross-platform tools for operations, counters and field teams.',['.NET / WPF','Electron','Java','Qt']],
+  ['mob','Mobile apps','Native and cross-platform apps for iOS and Android, from first version to store release.',['Flutter','React Native','Swift','Kotlin']],
+  ['data','Data engineering','Pipelines, warehouses and lakehouses that turn scattered data into trusted reports.',['Spark','Airflow','Snowflake','Databricks']],
+  ['ai','AI applications','Chat assistants, document search, forecasting and automation built on your data.',['LLMs','RAG','Python','MLOps']],
+  ['shop','e-Commerce applications','Stores and marketplaces with catalogue, inventory, orders, shipping and accounts.',['Shopify','WooCommerce','Magento','Headless']],
+  ['pay','Payment gateway integration','Secure checkout, subscriptions, refunds and reconciliation, following PCI DSS practices.',['Stripe','PayPal','Razorpay','UPI']],
+  ['team','IT staffing','Tested developers, data engineers and testers on contract, contract to hire or direct hire.',['Contract','C2H','Direct hire']],
+  ['qa','Testing and support','Manual and automated testing, performance checks, cloud deployment and maintenance.',['Selenium','Cypress','AWS','Azure']]
+];
 document.getElementById('svcGrid').innerHTML = svcs.map(([k,t,d,tags]) =>
-  `<article class="svc"><svg viewBox="0 0 44 44" aria-hidden="true">${ic[k]}</svg><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${tags.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></article>`).join('');
+  `<article class="svc"><span class="ic">${svg(k)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${tags.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></article>`).join('');
 
 const roles = ['Full-stack developers','Front-end engineers','Java and .NET developers','Python developers','Mobile developers','Data engineers','Data analysts','ML and AI engineers','Cloud and DevOps engineers','QA automation engineers','Business analysts','Project managers'];
 document.getElementById('roles').innerHTML = roles.map(r=>`<span>${esc(r)}</span>`).join('');
 
-const tech = ['JavaScript','TypeScript','React','Angular','Node.js','Python','Java','C# and .NET','Flutter','Kotlin','Swift','SQL','PostgreSQL','MongoDB','Apache Spark','Kafka','Airflow','Snowflake','Databricks','AWS','Azure','Google Cloud','Docker','Kubernetes'];
+const tech = ['JavaScript','TypeScript','React','Angular','Node.js','Python','Java','C# and .NET','Flutter','Kotlin','Swift','SQL','PostgreSQL','MySQL','MongoDB','Apache Spark','Kafka','Airflow','Snowflake','Databricks','AWS','Azure','Google Cloud','Docker','Kubernetes'];
 document.getElementById('tech').innerHTML = tech.map(r=>`<span>${esc(r)}</span>`).join('');
+
+const inds = [['retail','Retail'],['health','Healthcare'],['bank','Finance'],['edu','Education'],['truck','Logistics'],['factory','Manufacturing']];
+document.getElementById('inds').innerHTML = inds.map(([k,t]) => `<div class="ind">${svg(k)}<span>${esc(t)}</span></div>`).join('');
 
 const tracks = [
   ['data','Data Engineering','Build a working data pipeline end to end, from raw files to a live dashboard.',['SQL and data modelling','Python and PySpark','Airflow scheduling','Cloud warehouse and BI'],'12 weeks'],
@@ -374,9 +634,13 @@ const tracks = [
   ['ai','AI Applications','Create an AI assistant that answers questions from real documents.',['Python for machine learning','Prompting and LLM APIs','Retrieval and vector search','Evaluating and shipping a model'],'12 weeks']
 ];
 document.getElementById('tracks').innerHTML = tracks.map(([k,t,d,l,w]) =>
-  `<article class="track"><svg viewBox="0 0 44 44" width="44" height="44" aria-hidden="true" style="color:#101418">${ic[k]}</svg><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="meta"><span>${esc(w)}</span><span>Remote or hybrid</span><span>Mentor led</span></div></article>`).join('');
+  `<article class="track"><span class="ic">${svg(k)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="meta"><span>${esc(w)}</span><span>Remote or hybrid</span><span>Mentor led</span></div></article>`).join('');
 
 document.getElementById('yr').textContent = new Date().getFullYear();
+
+const menu = document.getElementById('menu'), links = document.getElementById('links');
+menu.addEventListener('click', () => { const o = links.classList.toggle('open'); menu.setAttribute('aria-expanded', o); });
+links.addEventListener('click', e => { if (e.target.tagName === 'A') { links.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); } });
 
 const f = document.getElementById('f'), err = document.getElementById('err'), ok = document.getElementById('ok');
 const btn = f.querySelector('button[type=submit]');
