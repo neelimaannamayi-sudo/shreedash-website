@@ -509,7 +509,7 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
     <div class="tracks" id="tracks"></div>
     <div class="facts">
       <div><b>Who can apply</b><p>Students, recent graduates and career changers with basic programming knowledge.</p></div>
-      <div><b>Format</b><p>Remote or hybrid, with live sessions, code reviews and a mentor.</p></div>
+      <div><b>Duration and format</b><p>6 months, remote or hybrid, with live sessions, code reviews and a mentor.</p></div>
       <div><b>What you get</b><p>A finished portfolio project, a completion certificate and a reference.</p></div>
       <div><b>How to apply</b><p>Choose an internship track in the contact form below.</p></div>
     </div>
@@ -629,9 +629,9 @@ const inds = [['retail','Retail'],['health','Healthcare'],['bank','Finance'],['e
 document.getElementById('inds').innerHTML = inds.map(([k,t]) => `<div class="ind">${svg(k)}<span>${esc(t)}</span></div>`).join('');
 
 const tracks = [
-  ['data','Data Engineering','Build a working data pipeline end to end, from raw files to a live dashboard.',['SQL and data modelling','Python and PySpark','Airflow scheduling','Cloud warehouse and BI'],'12 weeks'],
-  ['web','Web Development','Design, build and deploy a full-stack web application with sign-in and a database.',['HTML, CSS and JavaScript','React front end','Node.js or Python APIs','Git, testing and deployment'],'12 weeks'],
-  ['ai','AI Applications','Create an AI assistant that answers questions from real documents.',['Python for machine learning','Prompting and LLM APIs','Retrieval and vector search','Evaluating and shipping a model'],'12 weeks']
+  ['data','Data Engineering','Build a working data pipeline end to end, from raw files to a live dashboard.',['SQL and data modelling','Python and PySpark','Airflow scheduling','Cloud warehouse and BI'],'6 months'],
+  ['web','Web Development','Design, build and deploy a full-stack web application with sign-in and a database.',['HTML, CSS and JavaScript','React front end','Node.js or Python APIs','Git, testing and deployment'],'6 months'],
+  ['ai','AI Applications','Create an AI assistant that answers questions from real documents.',['Python for machine learning','Prompting and LLM APIs','Retrieval and vector search','Evaluating and shipping a model'],'6 months']
 ];
 document.getElementById('tracks').innerHTML = tracks.map(([k,t,d,l,w]) =>
   `<article class="track"><span class="ic">${svg(k)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="meta"><span>${esc(w)}</span><span>Remote or hybrid</span><span>Mentor led</span></div></article>`).join('');
