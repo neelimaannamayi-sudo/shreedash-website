@@ -28,6 +28,7 @@ const envAdmin = ADMIN_PASSWORD_HASH.startsWith('$2');
 const DUMMY_HASH = bcrypt.hashSync(crypto.randomBytes(16).toString('hex'), 12);
 
 const TOPICS = [
+  'AI agents and voice assistants', 'Customer support AI', 'AI business automation', 'Mobile apps with AI agents',
   'Software development', 'IT staffing', 'Data engineering', 'AI applications',
   'e-Commerce and payments', 'Internship: Data Engineering',
   'Internship: Web Development', 'Internship: AI Applications'

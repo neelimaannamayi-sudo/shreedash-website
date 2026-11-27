@@ -82,6 +82,37 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px
 .vcard .ic svg{width:30px;height:30px}
 .vcard p{color:var(--mute);font-size:15px}
 
+/* ai agents */
+.ai .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+@media(min-width:861px){.chat{position:sticky;top:100px;margin-top:120px}}
+.alist{display:grid;gap:14px;margin-top:28px}
+.aitem{display:flex;gap:16px;align-items:flex-start;padding:18px;border:1px solid var(--line);border-radius:18px;background:#fff}
+.aitem .ic{flex:none;width:52px;height:52px;border-radius:14px;background:var(--vl);display:grid;place-items:center;color:var(--v)}
+.aitem .ic svg{width:30px;height:30px}
+.aitem b{display:block;font-size:18px;color:var(--vd)}
+.aitem p{color:var(--mute);font-size:15px}
+.chat{background:linear-gradient(160deg,var(--vd),#3a149c);border-radius:28px;padding:clamp(18px,3vw,30px);color:#fff;box-shadow:0 30px 60px rgba(40,10,110,.25)}
+.chat .bar{display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.14)}
+.chat .bar img{width:40px;height:40px}
+.chat .bar b{display:block;font-size:16px}
+.chat .bar small{color:#cfc3f2;font-size:13px}
+.chat .bar small::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:#4ade80;margin-right:6px}
+.msgs{display:grid;gap:10px;padding:18px 0}
+.m{max-width:82%;padding:11px 14px;border-radius:16px;font-size:15px;line-height:1.45}
+.m.u{justify-self:end;background:#fff;color:var(--ink);border-bottom-right-radius:4px}
+.m.a{background:rgba(255,255,255,.12);border-bottom-left-radius:4px}
+.m.a .k{display:inline-block;margin-top:8px;background:var(--y);color:var(--vd);font-weight:700;font-size:13px;padding:4px 10px;border-radius:99px}
+.voice{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border-radius:16px;padding:12px 14px}
+.voice .mic{flex:none;width:40px;height:40px;border-radius:50%;background:var(--y);display:grid;place-items:center;color:var(--vd)}
+.voice .mic svg{width:20px;height:20px}
+.wave{flex:1;display:flex;align-items:center;gap:3px;height:28px}
+.wave i{flex:1;max-width:5px;border-radius:3px;background:#d9c9ff;animation:wv 1.2s ease-in-out infinite}
+.voice small{color:#cfc3f2;font-size:13px;white-space:nowrap}
+.chans{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chans span{font-size:13px;font-weight:700;border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:4px 11px}
+@keyframes wv{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+@media(prefers-reduced-motion:reduce){.wave i{animation:none}}
+
 /* about */
 .about .top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 64px;align-items:end;margin-bottom:44px}
 .trio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
@@ -210,7 +241,7 @@ footer .desc{color:#cfc3f2;margin-top:14px;max-width:38ch;font-size:15px}
 footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-block:22px;font-size:14px;color:#a99bd6;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 
 @media(max-width:1060px){.links{display:none}.links.open{display:flex;flex-direction:column;align-items:stretch;position:absolute;top:72px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);padding:10px max(5vw,16px) 16px}.menu{display:grid;place-items:center}.navcta{display:none}.vgrid,.models{grid-template-columns:repeat(2,minmax(0,1fr))}.inds{grid-template-columns:repeat(3,minmax(0,1fr))}.steps{grid-template-columns:minmax(0,1fr)}.steps li{padding:0 0 0 66px;min-height:52px}.steps li::after{display:none}.facts{grid-template-columns:repeat(2,minmax(0,1fr))}footer .cols{grid-template-columns:repeat(3,minmax(0,1fr))}footer .cols>div:first-child{grid-column:1/-1}}
-@media(max-width:860px){.hero .wrap,.about .top,.head,.pillars .wrap,.contact,.cta,.split{grid-template-columns:minmax(0,1fr)}.grid,.tracks{grid-template-columns:repeat(2,minmax(0,1fr))}.cta .acts{justify-content:flex-start}.trio{grid-template-columns:minmax(0,1fr)}.trio div,.trio div+div{padding:22px 0;border-left:0;border-bottom:1px solid var(--line)}}
+@media(max-width:860px){.ai .wrap,.hero .wrap,.about .top,.head,.pillars .wrap,.contact,.cta,.split{grid-template-columns:minmax(0,1fr)}.grid,.tracks{grid-template-columns:repeat(2,minmax(0,1fr))}.cta .acts{justify-content:flex-start}.trio{grid-template-columns:minmax(0,1fr)}.trio div,.trio div+div{padding:22px 0;border-left:0;border-bottom:1px solid var(--line)}}
 @media(max-width:600px){.vgrid,.grid,.tracks,.models,.facts,.pgrid,form{grid-template-columns:minmax(0,1fr)}.inds{grid-template-columns:repeat(2,minmax(0,1fr))}footer .cols{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.feat{min-height:0}.feat .art{min-height:180px}}
 </style>
 </head>
@@ -221,6 +252,7 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
     <div class="links" id="links">
       <a href="#top">Home</a>
       <a href="#about">About us</a>
+      <a href="#ai-agents">AI agents</a>
       <a href="#services">Services</a>
       <a href="#staffing">Staffing</a>
       <a href="#industries">Industries</a>
@@ -237,7 +269,7 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
     <div>
       <p class="tag">IT consulting, software and staffing</p>
       <h1>Technology that moves your business <span>forward</span></h1>
-      <p class="lede">Shreedash builds web, desktop and mobile applications, data platforms, AI solutions and online stores with secure payments. Need people instead? We place skilled engineers on your team.</p>
+      <p class="lede">Shreedash builds AI agents and voice assistants, automates customer support and business processes, and delivers web and mobile applications, data platforms and online stores with secure payments. Need people instead? We place skilled engineers on your team.</p>
       <div class="acts">
         <a class="btn yel arrow" href="#services">Explore services</a>
         <a class="btn line" href="#contact">Talk to our team</a>
@@ -318,6 +350,36 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
 <section class="values">
   <div class="wrap">
     <div class="vgrid" id="values"></div>
+  </div>
+</section>
+
+<section class="band ai" id="ai-agents">
+  <div class="wrap">
+    <div>
+      <p class="tag">AI agents and assistants</p>
+      <h2>AI agents that serve your customers and run your business, day and night</h2>
+      <p class="lede" style="margin-top:16px">We design, build and run AI agents and voice assistants trained on your products, policies and data. They answer instantly, take action in your systems, and hand over to your team when a person is needed.</p>
+      <div class="alist">
+        <div class="aitem"><span class="ic" id="ai-ic1"></span><div><b>AI agents</b><p>Agents that answer questions, qualify leads, book appointments, track orders and update your CRM, helpdesk or ERP.</p></div></div>
+        <div class="aitem"><span class="ic" id="ai-ic2"></span><div><b>Voice assistants</b><p>Human-sounding voice assistants for phone lines, apps and websites, in English, Hindi and regional languages.</p></div></div>
+        <div class="aitem"><span class="ic" id="ai-ic4"></span><div><b>Business automation with AI agents</b><p>Agents that handle invoices, onboarding, reports, approvals and data entry end to end, so your team spends time on work that matters.</p></div></div>
+        <div class="aitem"><span class="ic" id="ai-ic5"></span><div><b>Mobile apps with follow-up AI agents</b><p>Apps whose built-in agents keep following up on tasks, monitor targets and deadlines, and alert your team the moment something needs attention.</p></div></div>
+        <div class="aitem"><span class="ic" id="ai-ic3"></span><div><b>End-to-end customer support AI</b><p>One AI team across chat, email, WhatsApp and phone, with AI assistants for your agents, call summaries and analytics.</p></div></div>
+      </div>
+      <div class="acts"><a class="btn arrow" href="#contact">Plan your AI agent</a></div>
+    </div>
+    <div class="chat" role="img" aria-label="Example conversation: a customer asks an AI support agent about an order and gets an instant answer, with a voice call option">
+      <div class="bar"><img src="/logo.svg" alt=""><div><b>Shreedash support agent</b><small>Online, replies instantly</small></div></div>
+      <div class="msgs">
+        <div class="m u">Hi, where is my order #48213?</div>
+        <div class="m a">It left our warehouse this morning and arrives tomorrow by 6 pm. Would you like delivery updates on WhatsApp?<br><span class="k">Track order</span></div>
+        <div class="m u">Yes please. Can I change the address?</div>
+        <div class="m a">Done. I have updated the address and sent a confirmation to your email.</div>
+      </div>
+      <div class="voice"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><span class="wave" id="wave"></span><small>Voice call in Hindi</small></div>
+      <div class="chans"><span>Website chat</span><span>WhatsApp</span><span>Email</span><span>Phone</span></div>
+      <p style="font-size:12px;color:#a99bd6;margin-top:12px">Example conversation</p>
+    </div>
   </div>
 </section>
 
@@ -557,7 +619,7 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
       <div><label for="company">Company or college</label><input id="company" name="company" autocomplete="organization"></div>
       <div class="full"><label for="topic">I am interested in</label>
         <select id="topic" name="topic">
-          <option>Software development</option><option>IT staffing</option><option>Data engineering</option><option>AI applications</option><option>e-Commerce and payments</option><option>Internship: Data Engineering</option><option>Internship: Web Development</option><option>Internship: AI Applications</option>
+          <option>AI agents and voice assistants</option><option>Customer support AI</option><option>AI business automation</option><option>Mobile apps with AI agents</option><option>Software development</option><option>IT staffing</option><option>Data engineering</option><option>AI applications</option><option>e-Commerce and payments</option><option>Internship: Data Engineering</option><option>Internship: Web Development</option><option>Internship: AI Applications</option>
         </select></div>
       <div class="full"><label for="msg">How can we help?</label><textarea id="msg" name="msg" maxlength="5000" required aria-describedby="e-msg"></textarea><small class="ferr" id="e-msg"></small></div>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
@@ -572,7 +634,7 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
   <div class="wrap">
     <div class="cols">
       <div><a class="logo" href="#top"><img src="/logo.svg" alt="" width="38" height="38">Shreedash</a><p class="desc">IT consulting, software development, data and AI solutions, and IT staffing for growing businesses.</p></div>
-      <div><h4>Services</h4><a href="#services">Web development</a><a href="#services">Desktop and mobile apps</a><a href="#services">Data engineering</a><a href="#services">AI applications</a><a href="#services">e-Commerce and payments</a></div>
+      <div><h4>Services</h4><a href="#ai-agents">AI agents and voice assistants</a><a href="#ai-agents">Customer support AI</a><a href="#ai-agents">AI business automation</a><a href="#ai-agents">Mobile apps with AI agents</a><a href="#services">Web development</a><a href="#services">Desktop and mobile apps</a><a href="#services">Data engineering</a><a href="#services">AI applications</a><a href="#services">e-Commerce and payments</a></div>
       <div><h4>Company</h4><a href="#about">About us</a><a href="#staffing">IT staffing</a><a href="#process">How we work</a><a href="#internships">Internships</a><a href="#industries">Industries</a></div>
       <div><h4>Contact</h4><a href="#contact">hello@shreedash.example</a><a href="#contact">+1 (555) 010-2040</a><a href="#contact">Send us a message</a></div>
     </div>
@@ -593,6 +655,10 @@ const ic = {
   pay:'<rect x="4" y="9" width="36" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 17h36" stroke="currentColor" stroke-width="5"/><rect x="9" y="24" width="10" height="6" rx="1.5" fill="#ffc93c"/>',
   team:'<circle cx="15" cy="14" r="6" fill="#ffc93c" stroke="currentColor" stroke-width="3"/><circle cx="30" cy="16" r="5" fill="none" stroke="currentColor" stroke-width="3"/><path d="M4 38c0-7 5-12 11-12s11 5 11 12M26 38c0-6 2-10 6-10s8 4 8 10" fill="none" stroke="currentColor" stroke-width="3"/>',
   qa:'<path d="M22 4l15 6v10c0 9-6 16-15 20C13 36 7 29 7 20V10z" fill="none" stroke="currentColor" stroke-width="3"/><path d="M15 21l5 5 9-10" fill="none" stroke="#e0a800" stroke-width="3.5" stroke-linecap="round"/>',
+  bot:'<rect x="7" y="13" width="30" height="23" rx="7" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 13V7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="22" cy="6" r="2.6" fill="#ffc93c"/><circle cx="16" cy="24" r="3" fill="currentColor"/><circle cx="28" cy="24" r="3" fill="currentColor"/><path d="M17 31h10" stroke="#e0a800" stroke-width="3" stroke-linecap="round"/><path d="M3 22v6M41 22v6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+  voice:'<rect x="15" y="4" width="14" height="24" rx="7" fill="#ffc93c" stroke="currentColor" stroke-width="3"/><path d="M9 21a13 13 0 0 0 26 0M22 34v6M15 40h14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+  auto:'<circle cx="20" cy="24" r="8" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 10v4M20 34v4M6 24h4M30 24h4M10 14l3 3M27 31l3 3M10 34l3-3M27 17l3-3" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M36 4q0 6 6 6q-6 0-6 6q0-6-6-6q6 0 6-6z" fill="#ffc93c" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>',
+  support:'<path d="M8 24v-3a14 14 0 0 1 28 0v3" fill="none" stroke="currentColor" stroke-width="3"/><rect x="5" y="23" width="8" height="12" rx="3" fill="#ffc93c" stroke="currentColor" stroke-width="2.5"/><rect x="31" y="23" width="8" height="12" rx="3" fill="#ffc93c" stroke="currentColor" stroke-width="2.5"/><path d="M35 35c0 4-4 6-10 6h-3" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
   code:'<path d="M15 12L5 22l10 10M29 12l10 10-10 10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M25 8l-6 28" stroke="#e0a800" stroke-width="3" stroke-linecap="round"/>',
   retail:'<path d="M6 16h32l-3 22H9z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M15 16a7 7 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="22" cy="27" r="4" fill="#ffc93c"/>',
   health:'<rect x="6" y="6" width="32" height="32" rx="8" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 14v16M14 22h16" stroke="#e0a800" stroke-width="4" stroke-linecap="round"/>',
@@ -605,22 +671,25 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const svg = k => `<svg viewBox="0 0 44 44" aria-hidden="true">${ic[k]}</svg>`;
 
 const values = [
-  ['code','Software development','Web, desktop and mobile apps built to your needs.'],
-  ['ai','Data and AI','Pipelines, dashboards and AI that use your own data.'],
+  ['bot','AI agents and automation','AI agents, voice assistants, 24x7 support and business automation.'],
+  ['code','Software and data','Web, desktop and mobile apps, data pipelines and dashboards.'],
   ['pay','e-Commerce and payments','Online stores with secure, reliable checkout.'],
   ['team','IT staffing','Tested engineers on contract or permanent roles.']
 ];
 document.getElementById('values').innerHTML = values.map(([k,t,d]) => `<div class="vcard"><span class="ic">${svg(k)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p></div>`).join('');
 
 const svcs = [
+  ['bot','AI agents','Autonomous agents that answer questions, qualify leads, book appointments and run tasks across your tools and data.',['LLMs','Tool use','RAG','Workflows']],
+  ['voice','Voice assistants','Natural voice assistants for phone lines, apps and websites, in English, Hindi and other languages.',['Speech-to-text','Text-to-speech','IVR','Multilingual']],
+  ['auto','AI business automation','AI agents that automate workflows like invoices, onboarding, reporting and approvals across your systems.',['Agents','n8n','Power Automate','APIs']],
+  ['support','Customer support AI','End-to-end support: AI agents and assistants on chat, email, WhatsApp and phone, with smooth handover to your team.',['Chat','WhatsApp','Email','Helpdesk']],
   ['web','Web development','Fast, accessible websites, portals and SaaS products with admin dashboards and APIs.',['React','Angular','Node.js','.NET','Django']],
   ['desk','Desktop applications','Reliable Windows, macOS and cross-platform tools for operations, counters and field teams.',['.NET / WPF','Electron','Java','Qt']],
-  ['mob','Mobile apps','Native and cross-platform apps for iOS and Android, from first version to store release.',['Flutter','React Native','Swift','Kotlin']],
+  ['mob','Mobile apps with AI agents','iOS and Android apps with AI agents that follow up, monitor work and keep your team informed with timely alerts.',['Flutter','React Native','Push alerts','AI agents']],
   ['data','Data engineering','Pipelines, warehouses and lakehouses that turn scattered data into trusted reports.',['Spark','Airflow','Snowflake','Databricks']],
   ['ai','AI applications','Chat assistants, document search, forecasting and automation built on your data.',['LLMs','RAG','Python','MLOps']],
   ['shop','e-Commerce applications','Stores and marketplaces with catalogue, inventory, orders, shipping and accounts.',['Shopify','WooCommerce','Magento','Headless']],
   ['pay','Payment gateway integration','Secure checkout, subscriptions, refunds and reconciliation, following PCI DSS practices.',['Stripe','PayPal','Razorpay','UPI']],
-  ['team','IT staffing','Tested developers, data engineers and testers on contract, contract to hire or direct hire.',['Contract','C2H','Direct hire']],
   ['qa','Testing and support','Manual and automated testing, performance checks, cloud deployment and maintenance.',['Selenium','Cypress','AWS','Azure']]
 ];
 document.getElementById('svcGrid').innerHTML = svcs.map(([k,t,d,tags]) =>
@@ -643,6 +712,8 @@ const tracks = [
 document.getElementById('tracks').innerHTML = tracks.map(([k,t,d,l,w]) =>
   `<article class="track"><span class="ic">${svg(k)}</span><h3>${esc(t)}</h3><p>${esc(d)}</p><ul>${l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="meta"><span>${esc(w)}</span><span>Remote or hybrid</span><span>Mentor led</span></div></article>`).join('');
 
+['bot','voice','support','auto','mob'].forEach((k,i) => document.getElementById('ai-ic'+(i+1)).innerHTML = svg(k));
+document.getElementById('wave').innerHTML = Array.from({length:28}, (_, i) => `<i style="height:${30 + (i * 37) % 70}%;animation-delay:${-(i % 7) * 0.15}s"></i>`).join('');
 document.getElementById('yr').textContent = new Date().getFullYear();
 
 const menu = document.getElementById('menu'), links = document.getElementById('links');
