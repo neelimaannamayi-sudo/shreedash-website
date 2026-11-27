@@ -137,7 +137,8 @@ async function start() {
     message: { error: 'Too many messages from this address. Please try again in a few minutes.' } });
 
   const clean = (v, max) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const PHONE_RE = /^\+?[0-9][0-9 ()\-.]{5,28}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   app.post('/api/contact', contactLimiter, async (req, res) => {
     const body = req.body || {};
@@ -146,6 +147,7 @@ async function start() {
 
     const name = clean(body.name, 120);
     const email = clean(body.email, 190);
+    const phone = clean(body.phone, 30);
     const company = clean(body.company, 190) || null;
     const topic = TOPICS.includes(body.topic) ? body.topic : 'Software development';
     const message = clean(body.message, 5000);
@@ -153,11 +155,14 @@ async function start() {
     if (!name || !EMAIL_RE.test(email) || message.length < 2) {
       return res.status(400).json({ error: 'Please add your name, a valid email and a short message.' });
     }
+    if (!PHONE_RE.test(phone) || phone.replace(/\D/g, '').length < 7) {
+      return res.status(400).json({ error: 'Please add a valid mobile number.' });
+    }
     if (!db.state.ready) return res.status(503).json({ error: 'We could not save your message just now. Please email us instead.' });
     try {
       await db.pool.execute(
-        'INSERT INTO enquiries (name, email, company, topic, message, ip_address, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?)',
-        [name, email, company, topic, message, req.ip || null, clean(req.get('user-agent'), 255) || null]
+        'INSERT INTO enquiries (name, email, phone, company, topic, message, ip_address, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        [name, email, phone, company, topic, message, req.ip || null, clean(req.get('user-agent'), 255) || null]
       );
       res.status(201).json({ ok: true });
     } catch (err) {
@@ -264,15 +269,15 @@ async function start() {
     if (status) { where.push('status = ?'); args.push(status); }
     if (topic) { where.push('topic = ?'); args.push(topic); }
     if (q) {
-      where.push('(name LIKE ? OR email LIKE ? OR company LIKE ? OR message LIKE ?)');
+      where.push('(name LIKE ? OR email LIKE ? OR phone LIKE ? OR company LIKE ? OR message LIKE ?)');
       const like = '%' + q.replace(/[\\%_]/g, m => '\\' + m) + '%';
-      args.push(like, like, like, like);
+      args.push(like, like, like, like, like);
     }
     const whereSql = where.length ? 'WHERE ' + where.join(' AND ') : '';
     try {
       const [[{ total }]] = await db.pool.query(`SELECT COUNT(*) AS total FROM enquiries ${whereSql}`, args);
       const [rows] = await db.pool.query(
-        `SELECT id, name, email, company, topic, message, status, created_at FROM enquiries ${whereSql}
+        `SELECT id, name, email, phone, company, topic, message, status, created_at FROM enquiries ${whereSql}
          ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`, [...args, pageSize, (page - 1) * pageSize]);
       const [counts] = await db.pool.query('SELECT status, COUNT(*) AS n FROM enquiries GROUP BY status');
       res.set('Cache-Control', 'no-store');
@@ -315,13 +320,13 @@ async function start() {
   // CSV export of everything
   app.get('/api/admin/enquiries.csv', requireAdmin, async (req, res) => {
     try {
-      const [rows] = await db.pool.query('SELECT id, created_at, status, name, email, company, topic, message FROM enquiries ORDER BY created_at DESC');
+      const [rows] = await db.pool.query('SELECT id, created_at, status, name, email, phone, company, topic, message FROM enquiries ORDER BY created_at DESC');
       const cell = v => {
         let s = v == null ? '' : (v instanceof Date ? v.toISOString() : String(v));
         if (/^[=+\-@\t\r]/.test(s)) s = "'" + s; // stop spreadsheet formula injection
         return '"' + s.replace(/"/g, '""') + '"';
       };
-      const head = ['id', 'created_at', 'status', 'name', 'email', 'company', 'topic', 'message'];
+      const head = ['id', 'created_at', 'status', 'name', 'email', 'phone', 'company', 'topic', 'message'];
       const csv = [head.join(',')].concat(rows.map(r => head.map(h => cell(r[h])).join(','))).join('\r\n');
       res.set({ 'Content-Type': 'text/csv; charset=utf-8', 'Content-Disposition': 'attachment; filename="shreedash-enquiries.csv"', 'Cache-Control': 'no-store' });
       res.send('﻿' + csv);

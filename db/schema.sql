@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS enquiries (
   id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name        VARCHAR(120)  NOT NULL,
   email       VARCHAR(190)  NOT NULL,
+  phone       VARCHAR(30)   NULL,
   company     VARCHAR(190)  NULL,
   topic       VARCHAR(80)   NOT NULL,
   message     TEXT          NOT NULL,

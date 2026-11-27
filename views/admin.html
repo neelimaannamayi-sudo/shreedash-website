@@ -37,7 +37,7 @@ th{font-size:13px;color:var(--mute);font-weight:700;white-space:nowrap}
 tr:last-child td{border-bottom:0}
 td.when{white-space:nowrap;color:var(--mute);font-size:14px}
 .who b{display:block}
-.who a{color:var(--mute);font-size:14px;overflow-wrap:anywhere}
+.who a{display:block;color:var(--mute);font-size:14px;overflow-wrap:anywhere}
 .msg{color:var(--mute);max-width:46ch;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-wrap}
 tr.open .msg{-webkit-line-clamp:unset;color:var(--ink)}
 .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--bg);white-space:nowrap}
@@ -71,7 +71,7 @@ td select{font:14px "Plus Jakarta Sans",sans-serif;min-height:38px;border:1.5px 
   </div>
   <div class="bar">
     <label for="q" hidden>Search</label>
-    <input id="q" type="search" placeholder="Search name, email, company or message">
+    <input id="q" type="search" placeholder="Search name, email, mobile, company or message">
     <label for="topic" hidden>Topic</label>
     <select id="topic"><option value="">All topics</option></select>
   </div>
@@ -115,7 +115,7 @@ async function load() {
     $('rows').innerHTML = d.rows.length ? d.rows.map(r => `
       <tr data-id="${Number(r.id)}">
         <td class="when">${esc(fmt(r.created_at))}</td>
-        <td class="who"><b>${esc(r.name)}</b><a href="mailto:${esc(r.email)}">${esc(r.email)}</a>${r.company ? `<div>${esc(r.company)}</div>` : ''}</td>
+        <td class="who"><b>${esc(r.name)}</b><a href="mailto:${esc(r.email)}">${esc(r.email)}</a>${r.phone ? `<a href="tel:${esc(r.phone.replace(/[^0-9+]/g, ''))}">${esc(r.phone)}</a>` : ''}${r.company ? `<div>${esc(r.company)}</div>` : ''}</td>
         <td><span class="pill">${esc(r.topic)}</span></td>
         <td><div class="msg">${esc(r.message)}</div></td>
         <td><select class="status ${r.status === 'new' ? 'st-new' : ''}" aria-label="Status">${Object.keys(LABEL).map(k => `<option value="${k}"${k === r.status ? ' selected' : ''}>${LABEL[k]}</option>`).join('')}</select></td>

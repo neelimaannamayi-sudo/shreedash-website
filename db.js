@@ -33,6 +33,7 @@ async function init() {
       id          INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
       name        VARCHAR(120)  NOT NULL,
       email       VARCHAR(190)  NOT NULL,
+      phone       VARCHAR(30)   NULL,
       company     VARCHAR(190)  NULL,
       topic       VARCHAR(80)   NOT NULL,
       message     TEXT          NOT NULL,
@@ -44,6 +45,9 @@ async function init() {
       INDEX idx_status_created (status, created_at),
       INDEX idx_email (email)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
+    // Add the phone column to tables created before it existed.
+    const [cols] = await pool.query("SELECT COUNT(*) AS n FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'enquiries' AND COLUMN_NAME = 'phone'");
+    if (!Number(cols[0].n)) await pool.query('ALTER TABLE enquiries ADD COLUMN phone VARCHAR(30) NULL AFTER email');
     await pool.query(`CREATE TABLE IF NOT EXISTS app_settings (
       k VARCHAR(64) NOT NULL PRIMARY KEY,
       v TEXT NOT NULL

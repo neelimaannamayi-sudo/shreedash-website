@@ -548,8 +548,9 @@ footer .bot{margin-top:48px;border-top:1px solid rgba(255,255,255,.12);padding-b
     <form id="f" novalidate>
       <div><label for="name">Full name</label><input id="name" name="name" autocomplete="name" required></div>
       <div><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+      <div><label for="phone">Mobile number</label><input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+91 98765 43210" maxlength="30" required></div>
       <div><label for="company">Company or college</label><input id="company" name="company" autocomplete="organization"></div>
-      <div><label for="topic">I am interested in</label>
+      <div class="full"><label for="topic">I am interested in</label>
         <select id="topic" name="topic">
           <option>Software development</option><option>IT staffing</option><option>Data engineering</option><option>AI applications</option><option>e-Commerce and payments</option><option>Internship: Data Engineering</option><option>Internship: Web Development</option><option>Internship: AI Applications</option>
         </select></div>
@@ -646,9 +647,13 @@ const f = document.getElementById('f'), err = document.getElementById('err'), ok
 const btn = f.querySelector('button[type=submit]');
 f.addEventListener('submit', async e => {
   e.preventDefault();
-  const data = {name: f.name.value.trim(), email: f.email.value.trim(), company: f.company.value.trim(), topic: f.topic.value, message: f.msg.value.trim(), website: f.website.value};
+  const data = {name: f.name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), company: f.company.value.trim(), topic: f.topic.value, message: f.msg.value.trim(), website: f.website.value};
   if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email) || !data.message) {
     err.textContent = 'Please add your name, a valid email and a short message.';
+    return;
+  }
+  if (!/^\+?[0-9][0-9 ()\-.]{5,28}$/.test(data.phone) || data.phone.replace(/\D/g, '').length < 7) {
+    err.textContent = 'Please add a valid mobile number.';
     return;
   }
   err.textContent = '';
