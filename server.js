@@ -11,6 +11,7 @@ const rateLimit = require('express-rate-limit');
 const bcrypt = require('bcryptjs');
 const db = require('./db');
 const validate = require('./public/validate');
+const voice = require('./lib/voice');
 
 const {
   PORT = 3000,
@@ -108,6 +109,7 @@ async function start() {
         fontSrc: ["'self'", 'https://fonts.gstatic.com'],
         imgSrc: ["'self'", 'data:'],
         connectSrc: ["'self'"],
+        mediaSrc: ["'self'", 'blob:', 'data:'],
         formAction: ["'self'"],
         frameAncestors: ["'none'"],
         upgradeInsecureRequests: null
@@ -115,7 +117,9 @@ async function start() {
     }
   }));
 
-  app.use(express.json({ limit: '20kb' }));
+  // The website voice assistant sends audio, so it parses its own (larger) body.
+  const jsonBody = express.json({ limit: '20kb' });
+  app.use((req, res, next) => (req.path === '/api/voice/web' ? next() : jsonBody(req, res, next)));
   app.use(express.urlencoded({ extended: false, limit: '10kb' }));
 
   app.use(session({
@@ -151,6 +155,7 @@ async function start() {
     const company = clean(body.company, 190) || null;
     const topic = TOPICS.includes(body.topic) ? body.topic : 'Software development';
     const message = clean(body.message, 5000);
+    const callback = body.callback === true || body.callback === 'on' || body.callback === '1';
 
     const fields = {};
     if (!name) fields.name = 'Please enter your name.';
@@ -163,11 +168,16 @@ async function start() {
     const email = em.value, phone = ph.value;
     if (!db.state.ready) return res.status(503).json({ error: 'We could not save your message just now. Please email us instead.' });
     try {
-      await db.pool.execute(
-        'INSERT INTO enquiries (name, email, phone, company, topic, message, ip_address, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        [name, email, phone, company, topic, message, req.ip || null, clean(req.get('user-agent'), 255) || null]
+      const [ins] = await db.pool.execute(
+        'INSERT INTO enquiries (name, email, phone, company, topic, message, callback_consent, ip_address, user_agent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        [name, email, phone, company, topic, message, callback ? 1 : 0, req.ip || null, clean(req.get('user-agent'), 255) || null]
       );
-      res.status(201).json({ ok: true });
+      let callbackQueued = false;
+      if (callback && voice.phoneEnabled()) {
+        try { await voice.queueCallback(ins.insertId); callbackQueued = true; }
+        catch (err) { console.error('Could not queue AI callback:', err.message); }
+      }
+      res.status(201).json({ ok: true, callback: callbackQueued, callbackNow: callbackQueued && voice.withinCallingHours() });
     } catch (err) {
       console.error('Failed to save enquiry:', err.message);
       res.status(500).json({ error: 'We could not save your message just now. Please try again or email us.' });
@@ -280,7 +290,9 @@ async function start() {
     try {
       const [[{ total }]] = await db.pool.query(`SELECT COUNT(*) AS total FROM enquiries ${whereSql}`, args);
       const [rows] = await db.pool.query(
-        `SELECT id, name, email, phone, company, topic, message, status, created_at FROM enquiries ${whereSql}
+        `SELECT id, name, email, phone, company, topic, message, status, callback_consent, created_at,
+           (SELECT c.status FROM voice_calls c WHERE c.enquiry_id = enquiries.id ORDER BY c.id DESC LIMIT 1) AS call_status
+         FROM enquiries ${whereSql}
          ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`, [...args, pageSize, (page - 1) * pageSize]);
       const [counts] = await db.pool.query('SELECT status, COUNT(*) AS n FROM enquiries GROUP BY status');
       res.set('Cache-Control', 'no-store');
@@ -313,6 +325,7 @@ async function start() {
     try {
       const [r] = await db.pool.execute('DELETE FROM enquiries WHERE id = ?', [id]);
       if (!r.affectedRows) return res.status(404).json({ error: 'Enquiry not found.' });
+      await db.pool.execute('DELETE FROM voice_calls WHERE enquiry_id = ?', [id]);
       res.json({ ok: true });
     } catch (err) {
       console.error('Failed to delete enquiry:', err.message);
@@ -339,13 +352,18 @@ async function start() {
     }
   });
 
+  // ---------- AI voice agent ----------
+  voice.routes(app, { express, rateLimit, requireAdmin });
+
   app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'views', '404.html')));
   app.use((err, req, res, next) => {
     console.error('Unexpected error:', err.message);
     res.status(500).send(page('Something went wrong', '<p>Please try again in a moment.</p><p><a href="/">Back to the website</a></p>'));
   });
 
-  app.listen(PORT, () => console.log(`Shreedash site running on port ${PORT} (admin: /admin)`));
+  const server = app.listen(PORT, () => console.log(`Shreedash site running on port ${PORT} (admin: /admin)`));
+  voice.attach(server);
+  voice.start();
 }
 
 start().catch(err => {

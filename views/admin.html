@@ -52,6 +52,14 @@ td select{font:14px "Plus Jakarta Sans",sans-serif;min-height:38px;border:1.5px 
 .danger{color:#b3261e}
 .empty{padding:40px;text-align:center;color:var(--mute)}
 .pager{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:14px 0 40px;color:var(--mute);flex-wrap:wrap}
+.cpill{display:inline-block;margin-top:6px;font-size:12px;font-weight:700;padding:2px 8px;border-radius:99px;background:light-dark(#f3eeff,#241a44);color:var(--v);white-space:nowrap}
+.calls{margin-top:12px;display:grid;gap:10px}
+.callbox{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--bg)}
+.callbox h4{margin:0 0 4px;font-size:14px}
+.callbox .sum{white-space:pre-wrap;margin:6px 0;color:var(--ink)}
+.callbox details summary{cursor:pointer;color:var(--v);font-weight:700;font-size:13px}
+.callbox .t{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:4px;font-size:14px}
+.callbox .t b{color:var(--mute);font-weight:700}
 .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#1d0b4a;color:#fff;padding:10px 16px;border-radius:10px;display:none;z-index:5}
 @media(max-width:760px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}thead{display:none}tr{display:grid;gap:6px;padding:12px 14px;border-bottom:1px solid var(--line)}td{border:0;padding:0}.msg{max-width:none}}
 </style>
@@ -93,6 +101,21 @@ td select{font:14px "Plus Jakarta Sans",sans-serif;min-height:38px;border:1.5px 
 const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const LABEL = {new:'New', in_progress:'In progress', closed:'Closed'};
+const CALL = {queued:'Queued', dialing:'Dialling', in_progress:'On the call', completed:'Talked', no_reply:'Answered, no reply', no_answer:'No answer', busy:'Busy', failed:'Failed', canceled:'Cancelled', cancelled:'Cancelled'};
+const WHO = {user:'Caller', assistant:'AI'};
+async function loadCalls(tr) {
+  let box = tr.querySelector('.calls');
+  if (!box) { box = document.createElement('div'); box.className = 'calls'; tr.querySelector('.msg').after(box); }
+  box.textContent = 'Loading calls…';
+  try {
+    const d = await api('/api/admin/enquiries/' + tr.dataset.id + '/calls');
+    box.innerHTML = d.rows.length ? d.rows.map(c => `<div class="callbox"><h4>AI call · ${esc(CALL[c.status] || c.status)}${c.duration_sec ? ' · ' + Math.round(c.duration_sec / 60 * 10) / 10 + ' min' : ''}${c.language ? ' · ' + esc(c.language) : ''}</h4>
+      <div style="color:var(--mute);font-size:13px">${esc(fmt(c.created_at))}${c.attempts > 1 ? ' · ' + c.attempts + ' attempts' : ''}${c.error ? ' · ' + esc(c.error) : ''}${c.status === 'queued' ? ` · <button class="cancel" data-call="${Number(c.id)}" style="min-height:30px;font-size:12px">Cancel</button>` : ''}</div>
+      ${c.summary ? `<p class="sum">${esc(c.summary)}</p>` : ''}
+      ${c.transcript.length ? `<details><summary>Transcript (${c.transcript.length} turns)</summary><ul class="t">${c.transcript.map(t => `<li><b>${WHO[t.role] || esc(t.role)}:</b> ${esc(t.content)}</li>`).join('')}</ul></details>` : ''}</div>`).join('')
+      : '<div style="color:var(--mute);font-size:14px">No AI calls yet.</div>';
+  } catch (x) { box.textContent = x.message; }
+}
 const st = {q:'', status:'', topic:'', page:1, total:0, pageSize:25};
 let topicsLoaded = false, timer;
 
@@ -122,8 +145,8 @@ async function load() {
         <td class="who"><b>${esc(r.name)}</b><a href="mailto:${esc(r.email)}">${esc(r.email)}</a>${r.phone ? `<a href="tel:${esc(r.phone.replace(/[^0-9+]/g, ''))}">${esc(r.phone)}</a>` : ''}${r.company ? `<div>${esc(r.company)}</div>` : ''}</td>
         <td><span class="pill">${esc(r.topic)}</span></td>
         <td><div class="msg">${esc(r.message)}</div></td>
-        <td><select class="status ${r.status === 'new' ? 'st-new' : ''}" aria-label="Status">${Object.keys(LABEL).map(k => `<option value="${k}"${k === r.status ? ' selected' : ''}>${LABEL[k]}</option>`).join('')}</select></td>
-        <td><div class="acts"><button class="more">Read</button><a class="btn" style="min-height:36px;font-size:13px;padding:0 10px" href="mailto:${esc(r.email)}?subject=${encodeURIComponent('Re: your enquiry to Shreedash')}">Reply</a><button class="del danger">Delete</button></div></td>
+        <td><select class="status ${r.status === 'new' ? 'st-new' : ''}" aria-label="Status">${Object.keys(LABEL).map(k => `<option value="${k}"${k === r.status ? ' selected' : ''}>${LABEL[k]}</option>`).join('')}</select>${r.call_status ? `<div><span class="cpill">AI call: ${esc(CALL[r.call_status] || r.call_status)}</span></div>` : (r.callback_consent ? '<div><span class="cpill">Asked for a call</span></div>' : '')}</td>
+        <td><div class="acts"><button class="more">Read</button>${r.phone ? '<button class="call">AI call</button>' : ''}<a class="btn" style="min-height:36px;font-size:13px;padding:0 10px" href="mailto:${esc(r.email)}?subject=${encodeURIComponent('Re: your enquiry to Shreedash')}">Reply</a><button class="del danger">Delete</button></div></td>
       </tr>`).join('') : `<tr><td colspan="6" class="empty">${st.q || st.status || st.topic ? 'No enquiries match these filters.' : 'No enquiries yet. Messages sent from the contact form will appear here.'}</td></tr>`;
     const from = d.total ? (st.page - 1) * st.pageSize + 1 : 0, to = Math.min(st.page * st.pageSize, d.total);
     $('info').textContent = `Showing ${from}–${to} of ${d.total}`;
@@ -145,7 +168,18 @@ $('rows').addEventListener('change', async e => {
 });
 $('rows').addEventListener('click', async e => {
   const tr = e.target.closest('tr'); if (!tr) return;
-  if (e.target.matches('.more')) { tr.classList.toggle('open'); e.target.textContent = tr.classList.contains('open') ? 'Less' : 'Read'; }
+  if (e.target.matches('.more')) {
+    tr.classList.toggle('open'); e.target.textContent = tr.classList.contains('open') ? 'Less' : 'Read';
+    if (tr.classList.contains('open')) loadCalls(tr); else { const b = tr.querySelector('.calls'); if (b) b.remove(); }
+  }
+  if (e.target.matches('.call')) {
+    e.target.disabled = true;
+    try { const j = await api('/api/admin/enquiries/' + tr.dataset.id + '/call', {method:'POST'}); toast(j.note || 'Call queued'); load(); }
+    catch (x) { toast(x.message); e.target.disabled = false; }
+  }
+  if (e.target.matches('.cancel')) {
+    try { await api('/api/admin/calls/' + e.target.dataset.call, {method:'DELETE'}); toast('Call cancelled'); load(); } catch (x) { toast(x.message); }
+  }
   if (e.target.matches('.del')) {
     if (!e.target.dataset.confirm) { e.target.dataset.confirm = '1'; e.target.textContent = 'Confirm delete'; setTimeout(() => { if (e.target.isConnected) { delete e.target.dataset.confirm; e.target.textContent = 'Delete'; } }, 4000); return; }
     try { await api('/api/admin/enquiries/' + tr.dataset.id, {method:'DELETE'}); toast('Enquiry deleted'); load(); } catch (x) { toast(x.message); }
