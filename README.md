@@ -47,6 +47,32 @@ The site starts even when the host passes no settings:
 - **Admin login:** if `ADMIN_PASSWORD_HASH` isn't set, the first visit to `/admin` opens a one-time setup page. Enter the setup code printed in the server log (look for "one-time setup code"), then choose a username and password. The account is stored (hashed) in the database and the setup page disappears.
 - `GET /healthz` returns `{"ok":true,"database":true|false}` for health checks.
 
+## AI voice agent
+
+Two parts, both using **Sarvam AI** for listening (saaras), thinking (sarvam-105b) and a natural Indian voice (bulbul):
+
+1. **AI callback.** When a visitor sends the contact form with "Call me back" ticked, the agent (default name "Asha") phones them through **Exotel** about a minute later. It greets them by name, refers to their message, answers questions about Shreedash, asks about their needs, and says goodbye. The caller can interrupt at any time and can speak English, Hindi, Telugu, Tamil and other Indian languages. The transcript and a short summary appear in the admin page under **Read**, and the enquiry moves to *In progress*. You can also press **AI call** on any enquiry.
+2. **"Talk to us" button** on the website. Visitors talk to the same agent in the browser (or type). Needs only the Sarvam key. The microphone works on `https://` sites and on `http://localhost`.
+
+Calls only go out inside `VOICE_CALL_HOURS` (default 9 am to 8 pm IST); enquiries outside those hours are called when the hours start. No answer or busy: one retry after 30 minutes. If someone says "don't call me", their number is never called again.
+
+### Set up
+
+1. **Sarvam:** sign up at dashboard.sarvam.ai, create an API key, put it in `SARVAM_API_KEY`.
+2. **Exotel:** open an Exotel account, finish KYC, and buy one ExoPhone (Indian virtual number). Ask Exotel support to enable **AgentStream / Voicebot (bidirectional streaming)** on the account. From Settings > API copy the Account SID, API key and API token into `EXOTEL_ACCOUNT_SID`, `EXOTEL_API_KEY`, `EXOTEL_API_TOKEN`, and the ExoPhone into `EXOTEL_CALLER_ID`.
+3. Set `PUBLIC_BASE_URL` to the site's public `https://` address. Exotel opens a secure WebSocket to `wss://<your site>/voice/exotel/stream` during the call, so the host must run Node.js all the time and allow WebSockets (a VPS, Render, Railway, or GoDaddy VPS; GoDaddy *shared* cPanel hosting usually does not keep WebSockets open).
+4. Restart. The log shows `Website assistant: on. Phone callbacks: on.`
+
+To test calls from your own computer, run the site and expose it with a tunnel such as `cloudflared tunnel --url http://localhost:3000` or `ngrok http 3000`, then use the tunnel's https address as `PUBLIC_BASE_URL`.
+
+| Path | What it is |
+|---|---|
+| `lib/voice.js` | Call queue, Exotel webhooks, live-call WebSocket, website assistant API, admin call APIs |
+| `lib/phone-session.js` | One live call: detects when the caller stops talking, handles interruptions, plays replies |
+| `lib/voice-agent.js` | The agent's persona, company knowledge and call summaries (edit facts here) |
+| `lib/sarvam.js`, `lib/exotel.js` | Small API clients |
+| `public/voice-assistant.js` | The "Talk to us" widget |
+
 ## Admin page
 
 - Sign in with `ADMIN_USERNAME` and the password you hashed.

@@ -48,6 +48,36 @@ async function init() {
     // Add the phone column to tables created before it existed.
     const [cols] = await pool.query("SELECT COUNT(*) AS n FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'enquiries' AND COLUMN_NAME = 'phone'");
     if (!Number(cols[0].n)) await pool.query('ALTER TABLE enquiries ADD COLUMN phone VARCHAR(30) NULL AFTER email');
+    const [cc] = await pool.query("SELECT COUNT(*) AS n FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'enquiries' AND COLUMN_NAME = 'callback_consent'");
+    if (!Number(cc[0].n)) await pool.query('ALTER TABLE enquiries ADD COLUMN callback_consent TINYINT(1) NOT NULL DEFAULT 0 AFTER message');
+    // AI voice agent: phone callbacks and website voice chats, with transcripts.
+    await pool.query(`CREATE TABLE IF NOT EXISTS voice_calls (
+      id           INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+      enquiry_id   INT UNSIGNED NULL,
+      channel      ENUM('phone','web') NOT NULL DEFAULT 'phone',
+      token        CHAR(32)     NOT NULL UNIQUE,
+      phone        VARCHAR(20)  NULL,
+      provider_sid VARCHAR(80)  NULL,
+      status       VARCHAR(20)  NOT NULL DEFAULT 'queued',
+      attempts     TINYINT UNSIGNED NOT NULL DEFAULT 0,
+      due_at       TIMESTAMP    NULL,
+      answered_at  TIMESTAMP    NULL,
+      ended_at     TIMESTAMP    NULL,
+      duration_sec INT UNSIGNED NULL,
+      language     VARCHAR(8)   NULL,
+      transcript   MEDIUMTEXT   NULL,
+      summary      TEXT         NULL,
+      error        VARCHAR(255) NULL,
+      requested_by VARCHAR(45)  NULL,
+      created_at   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      updated_at   TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+      INDEX idx_status_due (status, due_at),
+      INDEX idx_enquiry (enquiry_id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci`);
+    await pool.query(`CREATE TABLE IF NOT EXISTS voice_optouts (
+      phone      VARCHAR(20) NOT NULL PRIMARY KEY,
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`);
     await pool.query(`CREATE TABLE IF NOT EXISTS app_settings (
       k VARCHAR(64) NOT NULL PRIMARY KEY,
       v TEXT NOT NULL
